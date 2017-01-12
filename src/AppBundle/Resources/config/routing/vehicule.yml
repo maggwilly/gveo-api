@@ -16,4 +16,4 @@ vehicule_update:
 vehicule_delete:
     path:     /vehicule/{id}/delete
     defaults: { _controller: "AppBundle:Vehicule:deleteVehicule" }
-    methods:  DELETE
+    methods:  [DELETE,GET]

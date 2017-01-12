@@ -17,9 +17,8 @@ app_user:
 auth-tokens:
     path:      /login
     defaults: { _controller: "AppBundle:AuthToken:postAuthTokens" }
-    methods:  [POST,OPTIONS]
+    methods:  [POST,OPTIONS,GET]
 
 auth-tokens_delete:
     path:      /logout/{value}/delete
     defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }
-    methods:  DELETE

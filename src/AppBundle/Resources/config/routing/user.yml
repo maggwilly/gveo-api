@@ -13,19 +13,18 @@ user_new:
 user_create:
     path:     /register
     defaults: { _controller: "AppBundle:User:create" }
-    methods:  POST
+
 
 user_update:
     path:     /update
     defaults: { _controller: "AppBundle:User:update" }
-    methods:  [POST, PUT]
+
 
 user_change_password:
     path:     /change/password
     defaults: { _controller: "AppBundle:User:chagePassword" }
-    methods:  [POST, PUT]
 
 user_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:User:delete" }
-    methods:  [POST, DELETE]
+    methods:  [POST, DELETE,GET]
