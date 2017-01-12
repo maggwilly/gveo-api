@@ -1,0 +1,14 @@
+AppBundle\Entity\Systeme:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        nom:
+            groups: ['full']      
+        dscription:
+            groups: ['full']       
+        type:
+            groups: ['full']      
+        thumburl:
+            groups: ['full']
+          

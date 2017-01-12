@@ -1,0 +1,9 @@
+AppBundle\Entity\Releve:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        dateSave:
+            groups: ['full']      
+        km:
+            groups: ['full']       

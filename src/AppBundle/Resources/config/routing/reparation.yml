@@ -1,0 +1,90 @@
+reparations:
+    path:     /reparations/{idV}/{idO}/list
+    defaults: { _controller: "AppBundle:Reparation:reparations" }
+    methods:  GET
+
+reparation_last:
+    path:     /reparation/{idV}/{idO}/last
+    defaults: { _controller: "AppBundle:Reparation:lastReparation" }
+    methods:  GET
+
+police_last:
+    path:     /police/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastPolice" }
+    methods:  GET
+
+visite_last:
+    path:     /visite/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastVisite" }
+    methods:  GET
+
+releve_last:
+    path:     /releve/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastReleve" }
+    methods:  GET
+
+maintenances:
+    path:     /maintenances/{idV}/{idS}/list
+    defaults: { _controller: "AppBundle:Reparation:maintenances" }
+    methods:  [GET, POST]
+
+reparation_create:
+    path:     /reparation/create
+    defaults: { _controller: "AppBundle:Reparation:createReparation" }
+    methods:  [GET, POST]
+
+maintenance_create:
+    path:     /maintenance/create
+    defaults: { _controller: "AppBundle:Reparation:createMaintenance" }
+    methods:  [GET, POST]
+
+releve_create:
+    path:     /releve/create
+    defaults: { _controller: "AppBundle:Reparation:createReleve" }
+    methods:  [GET, POST]
+
+police_create:
+    path:     /police/create
+    defaults: { _controller: "AppBundle:Reparation:createPolice" }
+    methods:  [GET, POST]
+visite_create:
+    path:     /visite/create
+    defaults: { _controller: "AppBundle:Reparation:createVisite" }
+    methods:  [GET, POST]
+
+reparation_update:
+    path:     /reparation/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updateReparation" }
+    methods:  [GET, POST]
+
+visite_update:
+    path:     /visite/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updateVisite" }
+    methods:  [GET, POST]
+
+police_update:
+    path:     /police/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updatePolice" }
+    methods:  [GET, POST]
+
+    
+reparation_delete:
+    path:     /reparation/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteReparation" }
+    methods:  DELETE
+
+maintance_delete:
+    path:     /maintenance/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteMaintenance" }
+    methods:  DELETE
+
+police_delete:
+    path:     /police/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deletePolice" }
+    methods:  DELETE
+
+visite_delete:
+    path:     /visite/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteVisite" }
+    methods:  DELETE
+

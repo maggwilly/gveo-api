@@ -1,0 +1,9 @@
+AppBundle\Entity\Marque:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        nom:
+            groups: ['full']      
+        logo:
+            groups: ['full']       

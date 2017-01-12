@@ -1,0 +1,13 @@
+AppBundle\Entity\Reparation:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        dateSave:
+            groups: ['full']
+        duree:
+            groups: ['full']    
+        cout:
+            groups: ['full']        
+        km:
+            groups: ['full']       

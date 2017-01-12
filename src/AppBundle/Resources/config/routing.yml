@@ -1,0 +1,25 @@
+app_reparation:
+    resource: "@AppBundle/Resources/config/routing/reparation.yml"   
+    prefix: /
+
+app_vehicule:
+    resource: "@AppBundle/Resources/config/routing/vehicule.yml"   
+    prefix: /vehicule
+
+app_utils:
+    resource: "@AppBundle/Resources/config/routing/utils.yml"   
+    prefix: /utils
+
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"  
+    prefix: /user
+    
+auth-tokens:
+    path:      /login
+    defaults: { _controller: "AppBundle:AuthToken:postAuthTokens" }
+    methods:  [POST,OPTIONS]
+
+auth-tokens_delete:
+    path:      /logout/{value}/delete
+    defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }
+    methods:  DELETE

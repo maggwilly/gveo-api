@@ -1,0 +1,40 @@
+AppBundle\Entity\AuthToken:
+    attributes:
+        id:
+            groups: ['auth-token']
+        value:
+            groups: ['auth-token']
+        createdAt:
+            groups: ['auth-token']
+        user:
+            groups: ['auth-token']
+
+AppBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['user','organ' ,'commandeClient', 'auth-token','pointVente']
+        nom:
+            groups: ['user','organ', 'commandeClient', 'auth-token']
+        telephone:
+            groups: ['user','organ','commandeClient', 'auth-token']       
+        commandesClients:
+            groups: ['organ']
+
+
+AppBundle\Entity\Produit:
+    attributes:
+        id:
+            groups: ['produit', 'commandeProduit', 'pointVente']
+        nom:
+            groups: ['produit', 'commandeProduit', 'pointVente']
+        prix:
+            groups: ['produit', 'commandeProduit', 'pointVente']
+        conditionement:
+            groups: ['produit', 'commandeProduit', 'pointVente'] 
+        organ:
+            groups: ['produit']     
+        dernierStock:
+            groups: ['pointVente'] 
+        nombreJour:
+            groups: ['pointVente']    
+

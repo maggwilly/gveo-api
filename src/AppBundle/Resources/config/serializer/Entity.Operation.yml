@@ -1,0 +1,23 @@
+AppBundle\Entity\Operation:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        numroOrdre:
+            groups: ['full']      
+        km_alerte:
+            groups: ['full']       
+        libele:
+            groups: ['full']      
+        reference:
+            groups: ['full']
+        description:
+            groups: ['full']      
+        operation:
+            groups: ['full']                         
+        conseil:
+            groups: ['full']      
+        shortConseil:
+            groups: ['full']
+        thumburl:
+            groups: ['full']            

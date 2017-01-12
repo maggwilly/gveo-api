@@ -1,0 +1,15 @@
+AppBundle\Entity\User:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['user','full' ]
+        nom:
+            groups: ['user','full']
+        email:
+            groups: ['user','full', ] 
+        langue:
+            groups: ['user','full', ] 
+        telephone:
+            groups: ['user','full', ] 
+        pays:
+            groups: ['user','full', ]           

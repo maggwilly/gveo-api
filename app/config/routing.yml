@@ -1,0 +1,3 @@
+api_gestion_commercial:
+  type:     rest
+  resource: "@AppBundle/Resources/config/routing.yml"
