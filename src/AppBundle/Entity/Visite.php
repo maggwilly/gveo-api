@@ -24,20 +24,20 @@ class Visite implements InfoInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateSave", type="date")
+     * @ORM\Column(name="dateSave", type="datetime")
      */
     private $dateSave;
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="date")
+     * @ORM\Column(name="startDate", type="datetime")
      */
     private $startDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="endDate", type="date", length=255)
+     * @ORM\Column(name="endDate", type="datetime")
      */
     private $endDate;
 

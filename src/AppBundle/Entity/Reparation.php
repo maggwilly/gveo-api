@@ -31,7 +31,7 @@ class Reparation implements InfoInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateSave", type="date")
+     * @ORM\Column(name="dateSave", type="datetime")
      */
     private $dateSave;
 
