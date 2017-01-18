@@ -6,7 +6,9 @@ AppBundle\Entity\Operation:
         numroOrdre:
             groups: ['full']      
         km_alerte:
-            groups: ['full']       
+            groups: ['full']     
+        km_previsionnel_default:
+            groups: ['full']               
         libele:
             groups: ['full']      
         reference:
