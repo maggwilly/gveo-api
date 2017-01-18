@@ -206,12 +206,26 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
-
             $em->remove($entity);
             $em->flush();
         }
 
         return $this->redirect($this->generateUrl('user'));
+    }
+    /**
+     * @Rest\View()
+     */
+    public function removeAuthTokenAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $authToken = $this->getToken();
+        if ( $authToken) {
+            $em->remove($authToken);
+            $em->flush();
+        } else {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException();
+        }
+        return ['success'=>true];
     }
 
     /**
@@ -233,5 +247,9 @@ class UserController extends Controller
 
     private function getConnectedUser(){
     return $this->get('security.token_storage')->getToken()->getUser();
+}
+
+    private function getToken(){
+    return $this->get('security.token_storage')->getToken();
 }
 }

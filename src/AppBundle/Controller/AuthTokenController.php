@@ -49,29 +49,8 @@ class AuthTokenController extends Controller
         return $authToken;
     }
 
-    /**
-     * @Rest\View()
-     * @Rest\Delete("/auth-tokens/{id}")
-     */
-    public function removeAuthTokenAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $authToken = $em->getRepository('AppBundle:AuthToken')
-                    ->findOneByValue($request->get('value'));
-        /* @var $authToken AuthToken */
-        $connectedUser = $this->getConnectedUser();
-        if ($authToken && $authToken->getUser()->getId() === $connectedUser->getId()) {
-            $em->remove($authToken);
-            $em->flush();
-        } else {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException();
-        }
-        return ['success'=>true];
-    }
 
-private function getConnectedUser(){
-    return $this->get('security.token_storage')->getToken()->getUser();
-}
+
 
     private function invalidCredentials()
     {
