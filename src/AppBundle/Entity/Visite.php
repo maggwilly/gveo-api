@@ -24,7 +24,7 @@ class Visite implements InfoInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateSave", type="datetime")
+     * @ORM\Column(name="dateSave", type="date")
      */
     private $dateSave;
     /**

@@ -24,7 +24,7 @@ class Police implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="dateSave", type="datetime", length=255)
+     * @ORM\Column(name="dateSave", type="datetime")
      */
     private $dateSave;
 
