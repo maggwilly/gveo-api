@@ -22,7 +22,7 @@ class Police implements InfoInterface
     private $id;
 
     /**
-     * @var string
+     * @var \DateTime
      *
      * @ORM\Column(name="dateSave", type="datetime")
      */
@@ -35,13 +35,13 @@ class Police implements InfoInterface
      */
     private $startDate;
    /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="cout", type="integer")
      */
     private $cout;
     /**
-     * @var string
+     * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
      */

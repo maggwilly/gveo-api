@@ -43,7 +43,7 @@ class Reparation implements InfoInterface
     private $duree;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="cout", type="integer")
      */

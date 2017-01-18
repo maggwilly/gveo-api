@@ -60,7 +60,7 @@ class Vehicule implements InfoInterface
     private $coutAchat;
 
     /**
-     * @var string
+     * @var \DateTime
      *
      * @ORM\Column(name="dateMiseEnCirculation", type="datetime")
      */

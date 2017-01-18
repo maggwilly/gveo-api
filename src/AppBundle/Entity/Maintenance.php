@@ -29,7 +29,7 @@ class Maintenance implements InfoInterface
     private $dateSave;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="cout", type="integer")
      */

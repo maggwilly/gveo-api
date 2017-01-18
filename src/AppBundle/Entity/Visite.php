@@ -35,14 +35,14 @@ class Visite implements InfoInterface
     private $startDate;
 
     /**
-     * @var string
+     * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
      */
     private $endDate;
 
    /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="cout", type="integer")
      */
