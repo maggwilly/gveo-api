@@ -2,7 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity;
+use AppBundle\Entity\Releve;
+use AppBundle\Entity\Reparation;
+use AppBundle\Entity\Maintenance;
+use AppBundle\Entity\Police;
+use AppBundle\Entity\Visite;
+use AppBundle\Entity\InfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
@@ -25,6 +30,37 @@ class ReparationController extends Controller
 
         return  $reparations;
       
+    }
+
+
+    /**
+     * Creates a new Produit entity.
+     *@Rest\View()
+     */
+    public function coutsAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+       return $this->couts($request,$em);
+      
+    }
+
+
+
+     public function couts(Request $request, $em)
+    {
+        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($request->get('idV'),$request->get('annee'));
+        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($request->get('idV'),$request->get('annee'));
+        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($request->get('idV'),$request->get('annee'));
+        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($request->get('idV'),$request->get('annee'));
+        return  array(
+        	'coutReparations'=>$coutReparations,
+        	'coutPolices'=>$coutPolices,
+        	'coutVisites'=>$coutVisites,
+        	'coutMaintenances'=>$coutMaintenances,
+        	'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
+        	);
+
     }
 
         /**
@@ -79,7 +115,7 @@ class ReparationController extends Controller
 
         $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($request->get('idV'));
 
-        return  $releve;
+        return  ['releve'=> $releve, 'couts'=>$this->couts($request,$em)];
       
     }
     /**
@@ -111,7 +147,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
         return  $form;
     }
@@ -130,7 +166,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
         return  $form;
     } 
@@ -149,7 +185,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
         return  $form;
     }
@@ -168,7 +204,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
         return  $form;
     }
@@ -187,7 +223,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+         return  $entity;
         }
         return  $form;
     }
@@ -209,7 +245,7 @@ class ReparationController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
 
         return  $form;
@@ -231,7 +267,7 @@ class ReparationController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
 
         return  $form;
@@ -253,7 +289,7 @@ class ReparationController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
 
         return  $form;
@@ -275,7 +311,7 @@ class ReparationController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+           return $entity;
         }
 
         return  $form;

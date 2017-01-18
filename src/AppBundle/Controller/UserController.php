@@ -105,7 +105,7 @@ class UserController extends Controller
         }
 
 
-       return ['success'=>true,'data'=>$entity];
+       return $entity;
     }
 
     /**

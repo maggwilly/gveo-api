@@ -31,7 +31,7 @@ class Maintenance implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="cout", type="string", length=255)
+     * @ORM\Column(name="cout", type="integer")
      */
     private $cout;
 

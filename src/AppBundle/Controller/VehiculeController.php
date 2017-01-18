@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity;
+use AppBundle\Entity\Vehicule;
+use AppBundle\Form\VehiculeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
@@ -79,9 +80,9 @@ class VehiculeController extends Controller
      * @param Produit $entity The entity
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(InfoInterface $entity)
+    private function createCreateForm(Vehicule $entity)
     {
-        $form = $this->createForm($entity->getClassType(), $entity);
+        $form = $this->createForm(VehiculeType::class, $entity);
         return $form;
     }
      /**

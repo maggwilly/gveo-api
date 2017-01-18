@@ -10,7 +10,7 @@ AppBundle\Entity\Vehicule:
         chauffeur:
             groups: ['full'] 
         index0:
-            groups: ['full']     
+            groups: ['full']                  
         coutAchat:
             groups: ['full']        
         marque:

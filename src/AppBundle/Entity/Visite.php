@@ -37,7 +37,7 @@ class Visite implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="endDate", type="string", length=255)
+     * @ORM\Column(name="endDate", type="date", length=255)
      */
     private $endDate;
 
@@ -52,6 +52,15 @@ class Visite implements InfoInterface
      * @var Vehicule
      */
     private $vehicule;
+
+            /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateSave=new \DateTime();
+
+    } 
     /**
      * Get id
      *

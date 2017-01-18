@@ -50,6 +50,8 @@ class Vehicule implements InfoInterface
      */
     private $index0;
 
+
+    private $lastIndex;
     /**
      * @var int
      *
@@ -60,7 +62,7 @@ class Vehicule implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="dateMiseEnCirculation", type="string", length=255)
+     * @ORM\Column(name="dateMiseEnCirculation", type="datetime")
      */
     private $dateMiseEnCirculation;
 
@@ -79,6 +81,14 @@ class Vehicule implements InfoInterface
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Releve", mappedBy="vehicule", cascade={"persist","remove"})
    */
     private $releves;   
+
+        /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->releves = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -105,7 +115,18 @@ class Vehicule implements InfoInterface
 * @ORM\PrePersist
 */
 public function prePersist(){
+    $this->index0=$this->lastIndex;
     $releve= new Releve($this->index0);
+   $this->addRelefe($releve);  
+}
+
+/**
+* 
+ @ORM\PreUpdate()
+*/
+public function preUpdate(){
+
+    $releve= new Releve($this->lastIndex);
    $this->addRelefe($releve);  
 }
     /**
@@ -288,13 +309,7 @@ public function prePersist(){
     {
         return $this->chauffeur;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->releves = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Add releves
@@ -328,5 +343,28 @@ public function prePersist(){
     public function getReleves()
     {
         return $this->releves;
+    }
+
+    /**
+     * Set lastIndex
+     *
+     * @param integer $lastIndex
+     * @return Vehicule
+     */
+    public function setLastIndex($lastIndex)
+    {
+        $this->lastIndex = $lastIndex;
+
+        return $this;
+    }
+
+    /**
+     * Get lastIndex
+     *
+     * @return integer 
+     */
+    public function getLastIndex()
+    {
+        return $this->lastIndex;
     }
 }

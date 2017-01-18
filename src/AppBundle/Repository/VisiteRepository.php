@@ -12,7 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class VisiteRepository extends EntityRepository
 { 
-    public function findLastByVehicule($vehicule)
+ 
+ public function findLastByVehicule($vehicule)
 {
   $qb = $this->createQueryBuilder('r')
   ->where('r.vehicule=:vehicule')
@@ -22,4 +23,22 @@ class VisiteRepository extends EntityRepository
  return $qb->getQuery()->getOneOrNullResult();
 
 }  
+
+ public function findCoutTotal($vehicule,$annee=false)
+{
+
+
+ $qb = $this->createQueryBuilder('v')
+ ->andWhere('v.vehicule = :vehicule')
+ ->setParameter('vehicule', $vehicule);
+ if ($annee) {
+ 	$qb->andWhere('v.dateSave BETWEEN :debut AND :fin')
+  ->setParameter('debut', new \Datetime(date('Y').'-01-01')) //
+   ->setParameter('fin', new \Datetime(date('Y').'-12-31')); //
+ }
+ $qb->select('SUM(v.cout) as coutTotal');
+       
+ return $qb->getQuery()->getSingleScalarResult();
+}
+
 }

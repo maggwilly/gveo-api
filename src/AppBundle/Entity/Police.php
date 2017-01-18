@@ -24,7 +24,7 @@ class Police implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="dateSave", type="string", length=255)
+     * @ORM\Column(name="dateSave", type="datetime", length=255)
      */
     private $dateSave;
 
@@ -43,7 +43,7 @@ class Police implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="endDate", type="string", length=255)
+     * @ORM\Column(name="endDate", type="date", length=255)
      */
     private $endDate;
 
@@ -52,6 +52,15 @@ class Police implements InfoInterface
      * @var Vehicule
      */
     private $vehicule;
+
+        /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateSave=new \DateTime();
+
+    } 
     /**
      * Get id
      *

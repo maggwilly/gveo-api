@@ -22,7 +22,11 @@ releve_last:
     path:     /releve/{idV}/last
     defaults: { _controller: "AppBundle:Reparation:lastReleve" }
     methods:  GET
-
+couts:
+    path:     /couts/{idV}
+    defaults: { _controller: "AppBundle:Reparation:couts" }
+    methods:  GET
+    
 maintenances:
     path:     /maintenances/{idV}/{idS}/list
     defaults: { _controller: "AppBundle:Reparation:maintenances" }

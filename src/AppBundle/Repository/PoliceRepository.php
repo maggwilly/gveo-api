@@ -21,5 +21,25 @@ class PoliceRepository extends EntityRepository
   ->setMaxResults(1); 
  return $qb->getQuery()->getOneOrNullResult();
 
-}    
+}  
+
+
+ public function findCoutTotal($vehicule,$annee=false)
+{
+
+ $qb = $this->createQueryBuilder('v')
+ ->andWhere('v.vehicule = :vehicule')
+ ->setParameter('vehicule', $vehicule);
+ if ($annee) {
+ 	$qb->andWhere('v.dateSave BETWEEN :debut AND :fin')
+  ->setParameter('debut', new \Datetime(date('Y').'-01-01')) //
+   ->setParameter('fin', new \Datetime(date('Y').'-12-31')); //
+ }
+ $qb->select('SUM(v.cout) as coutTotal');
+       
+ return $qb->getQuery()->getSingleScalarResult();
+}
+  
+
+
 }

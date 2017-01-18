@@ -6,24 +6,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MaintenanceType extends AbstractType
+class PoliceType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('dateSave','datetime', array(
+        $builder
+        ->add('startDate','datetime', array(
               'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'invalid_message' => 'Validation date',
                 'error_bubbling' => true,
                 'input' => 'datetime' # return a Datetime object (*)
-            ))->add('cout')
-        ->add('coutMainOeuvre')
-        ->add('description')
-        ->add('systeme','entity',array('class' => 'AppBundle:Systeme'))
-        ->add('vehicule','entity',array('class' => 'AppBundle:Vehicule'))        ;
+            ))
+        ->add('cout')
+        ->add('endDate','datetime', array(
+              'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'invalid_message' => 'Validation date',
+                'error_bubbling' => true,
+                'input' => 'datetime' # return a Datetime object (*)
+            ))
+         ->add('vehicule','entity',array('class' => 'AppBundle:Vehicule'));
     }
     
     /**
@@ -32,7 +38,7 @@ class MaintenanceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Maintenance',
+            'data_class' => 'AppBundle\Entity\Police',
             'csrf_protection' => false
         ));
     }
@@ -42,7 +48,7 @@ class MaintenanceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_maintenance';
+        return 'appbundle_police';
     }
 
 
