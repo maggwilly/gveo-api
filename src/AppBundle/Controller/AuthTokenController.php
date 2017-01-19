@@ -50,10 +50,28 @@ class AuthTokenController extends Controller
     }
 
 
-
+    /**
+     * @Rest\View()
+      
+     */
+    public function removeAuthTokensAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+         $authToken = $em->getRepository('AppBundle:AuthToken')->findOneByValue($request->get('value'));
+        if (!$authToken) {
+            throw $this->createNotFoundException('Unable to find  $authToken entity.');
+        }
+            $em->remove($authToken);
+            $em->flush();
+       
+        return ['success'=>true];
+    }
 
     private function invalidCredentials()
     {
         return \FOS\RestBundle\View\View::create(['message' => 'Invalid credentials'], Response::HTTP_BAD_REQUEST);
     }
+   private function getToken(){
+    return $this->get('security.token_storage')->getToken();
+} 
 }

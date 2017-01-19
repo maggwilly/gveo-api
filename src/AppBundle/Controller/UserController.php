@@ -212,21 +212,7 @@ class UserController extends Controller
 
         return $this->redirect($this->generateUrl('user'));
     }
-    /**
-     * @Rest\View()
-     */
-    public function removeAuthTokenAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $authToken = $this->getToken();
-        if ( $authToken) {
-            $em->remove($authToken);
-            $em->flush();
-        } else {
-            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException();
-        }
-        return ['success'=>true];
-    }
+
 
     /**
      * Creates a form to delete a User entity by id.
@@ -249,7 +235,5 @@ class UserController extends Controller
     return $this->get('security.token_storage')->getToken()->getUser();
 }
 
-    private function getToken(){
-    return $this->get('security.token_storage')->getToken();
-}
+
 }
