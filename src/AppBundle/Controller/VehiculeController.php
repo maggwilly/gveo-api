@@ -43,7 +43,12 @@ class VehiculeController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $form->submit($request->request->all(),false); // Validation des d
+        $user = $this->getConnectedUser();
+         if (! $user) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
         if ($form->isValid()) {
+            $entity->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
