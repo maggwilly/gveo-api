@@ -8,6 +8,7 @@ use AppBundle\Entity\Maintenance;
 use AppBundle\Entity\Police;
 use AppBundle\Entity\Visite;
 use AppBundle\Entity\InfoInterface;
+use AppBundle\Entity\Vehicule;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
@@ -41,27 +42,13 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-       return $this->couts($request,$em);
+       return $this->couts($request->get('idV'),$request->get('annee'));
       
     }
 
 
 
-     public function couts(Request $request, $em)
-    {
-        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($request->get('idV'),$request->get('annee'));
-        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($request->get('idV'),$request->get('annee'));
-        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($request->get('idV'),$request->get('annee'));
-        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($request->get('idV'),$request->get('annee'));
-        return  array(
-        	'coutReparations'=>$coutReparations,
-        	'coutPolices'=>$coutPolices,
-        	'coutVisites'=>$coutVisites,
-        	'coutMaintenances'=>$coutMaintenances,
-        	'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
-        	);
 
-    }
 
         /**
      * Creates a new Produit entity.
@@ -115,8 +102,24 @@ class ReparationController extends Controller
 
         $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($request->get('idV'));
 
-        return  ['releve'=> $releve, 'couts'=>$this->couts($request,$em)];
+        return  ['releve'=> $releve, 'couts'=>ReparationController::couts($request->get('idV'),$request->get('annee'))];
       
+    }
+
+         static function couts($entity, $annee)
+    {    $em = $this->getDoctrine()->getManager();
+        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);
+        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($entity, $annee);
+        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($entity, $annee);
+        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($entity, $annee);
+        return  array(
+            'coutReparations'=>$coutReparations,
+            'coutPolices'=>$coutPolices,
+            'coutVisites'=>$coutVisites,
+            'coutMaintenances'=>$coutMaintenances,
+            'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
+            );
+
     }
     /**
      * Creates a new Produit entity.
@@ -223,7 +226,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-         return  $entity;
+         return ['success'=>true, 'releve'=> $entity];
         }
         return  $form;
     }

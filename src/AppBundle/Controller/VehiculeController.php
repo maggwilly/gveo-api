@@ -47,7 +47,11 @@ class VehiculeController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+          $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
+          $couts=ReparationController::couts($entity->getId());
+          $entity->setLastReleve($entity);
+          $entity->setCouts($couts);
+           return $entity;
         }
         return  $form;
     }
@@ -69,7 +73,11 @@ class VehiculeController extends Controller
 
         if ($form->isValid()) {
             $em->flush();
-           return ['success'=>true,'data'=>$entity];
+          $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
+          $couts=ReparationController::couts($request->get('id'));
+          $entity->setLastReleve($entity);
+          $entity->setCouts($couts);
+           return $entity;
         }
 
         return  $form;

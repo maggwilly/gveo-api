@@ -14,4 +14,8 @@ AppBundle\Entity\Vehicule:
         coutAchat:
             groups: ['full']        
         marque:
+            groups: ['full']   
+        lastReleve:
             groups: ['full']        
+        couts:
+            groups: ['full'] 

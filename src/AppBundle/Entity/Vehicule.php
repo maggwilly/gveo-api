@@ -52,6 +52,10 @@ class Vehicule implements InfoInterface
 
 
     private $lastIndex;
+
+    private $lastReleve;
+
+    private $couts;
     /**
      * @var int
      *
@@ -231,6 +235,51 @@ public function preUpdate(){
         return $this->marque;
     }
 
+     /**
+     * Get marque
+     *
+     * @return \AppBundle\Entity\Marque 
+     */
+    public function getLastReleve()
+    {
+        return $this->lastReleve;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Vehicule
+     */
+    public function setLastReleve(\AppBundle\Entity\Releve $lastReleve = null)
+    {
+        $this->lastReleve = $lastReleve;
+
+        return $this;
+    }
+
+         /**
+     * Get marque
+     *
+     * @return array
+     */
+    public function getCouts()
+    {
+        return $this->couts;
+    }
+
+    /**
+     * Set user
+     *
+     * @param array
+     * @return Vehicule
+     */
+    public function setCouts($couts = array())
+    {
+        $this->couts = $couts;
+
+        return $this;
+    }
     /**
      * Set user
      *
@@ -243,7 +292,6 @@ public function preUpdate(){
 
         return $this;
     }
-
     /**
      * Get user
      *
