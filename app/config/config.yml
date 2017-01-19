@@ -94,7 +94,7 @@ fos_rest:
             media_type:
                 enabled: true
     exception:
-        enabled: true
+        enabled: false
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Symfony\Component\Security\Core\Exception\BadCredentialsException': 401

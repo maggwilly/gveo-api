@@ -106,7 +106,7 @@ class ReparationController extends Controller
       
     }
 
-         static function couts($entity, $annee)
+    public function couts($entity, $annee=0)
     {    $em = $this->getDoctrine()->getManager();
         $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);
         $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($entity, $annee);

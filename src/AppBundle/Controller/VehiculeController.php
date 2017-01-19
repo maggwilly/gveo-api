@@ -48,14 +48,28 @@ class VehiculeController extends Controller
             $em->persist($entity);
             $em->flush();
           $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
-          $couts=ReparationController::couts($entity->getId());
-          $entity->setLastReleve($entity);
+          $couts=$this->couts($entity->getId());
+          $entity->setLastReleve($releve);
           $entity->setCouts($couts);
            return $entity;
         }
         return  $form;
     }
+    public function couts($entity, $annee=0)
+    {    $em = $this->getDoctrine()->getManager();
+        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);
+        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($entity, $annee);
+        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($entity, $annee);
+        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($entity, $annee);
+        return  array(
+            'coutReparations'=>$coutReparations,
+            'coutPolices'=>$coutPolices,
+            'coutVisites'=>$coutVisites,
+            'coutMaintenances'=>$coutMaintenances,
+            'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
+            );
 
+    }
 
      /**
      * Edits an existing Produit entity.
@@ -74,8 +88,8 @@ class VehiculeController extends Controller
         if ($form->isValid()) {
             $em->flush();
           $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
-          $couts=ReparationController::couts($request->get('id'));
-          $entity->setLastReleve($entity);
+          $couts=$this->couts($request->get('id'));
+          $entity->setLastReleve($releve);
           $entity->setCouts($couts);
            return $entity;
         }
