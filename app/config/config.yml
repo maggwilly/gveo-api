@@ -110,4 +110,4 @@ fos_rest:
         enabled: true
 
     serializer:
-        serialize_null:  true
+        serialize_null:  false
