@@ -22,6 +22,7 @@ class MaintenanceType extends AbstractType
             ))->add('cout')
         ->add('coutMainOeuvre')
         ->add('description')
+        ->add('status')
         ->add('systeme','entity',array('class' => 'AppBundle:Systeme'))
         ->add('vehicule','entity',array('class' => 'AppBundle:Vehicule'))        ;
     }

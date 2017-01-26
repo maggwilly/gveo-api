@@ -36,6 +36,13 @@ class Maintenance implements InfoInterface
     private $cout;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $status;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="coutMainOeuvre", type="integer")
