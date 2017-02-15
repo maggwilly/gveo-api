@@ -10,4 +10,6 @@ AppBundle\Entity\Maintenance:
         coutMainOeuvre:
             groups: ['full']        
         description:
-            groups: ['full']       
+            groups: ['full']    
+        status:
+            groups: ['full']     

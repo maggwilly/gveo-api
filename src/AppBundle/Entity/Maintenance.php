@@ -31,21 +31,21 @@ class Maintenance implements InfoInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="cout", type="integer")
+     * @ORM\Column(name="cout", type="integer", nullable=true)
      */
     private $cout;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=255, nullable=true)
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="coutMainOeuvre", type="integer")
+     * @ORM\Column(name="coutMainOeuvre", type="integer", nullable=true)
      */
     private $coutMainOeuvre;
 
