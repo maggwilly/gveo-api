@@ -13,9 +13,10 @@ security:
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js|utils)/
             security: false
             stateless: true
+            anonymous: true
         public:
       # since anonymous is allowed users will not be forced to login
             pattern:  login|register

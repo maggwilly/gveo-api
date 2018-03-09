@@ -42,7 +42,7 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-       return $this->couts($request->get('idV'),$request->get('annee'));
+       return $this->couts($request->get('idV'), $request->get('annee'));
       
     }
 
@@ -102,7 +102,7 @@ class ReparationController extends Controller
 
         $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($request->get('idV'));
 
-        return  ['releve'=> $releve, 'couts'=>ReparationController::couts($request->get('idV'),$request->get('annee'))];
+        return  $releve;
       
     }
 
@@ -128,9 +128,7 @@ class ReparationController extends Controller
     public function maintenancesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $maintenances = $em->getRepository('AppBundle:Maintenance')->findByVehicule($request->get('idV'),$request->get('idS'));
-
         return  $maintenances;
       
     }

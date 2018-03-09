@@ -60,6 +60,8 @@ class VehiculeController extends Controller
         }
         return  $form;
     }
+
+    
     public function couts($entity, $annee=0)
     {    $em = $this->getDoctrine()->getManager();
         $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);

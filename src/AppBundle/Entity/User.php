@@ -23,7 +23,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
@@ -53,13 +53,13 @@ class User implements UserInterface
      */
     private $pays; 
      /**
-     * @ORM\Column(type="string", length=700)
+     * @ORM\Column(type="string", length=700, nullable=true)
      */
     protected $password;
 
     protected $plainPassword;
 
-/**
+  /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")

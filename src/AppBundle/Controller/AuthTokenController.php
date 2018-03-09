@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les anno
 use AppBundle\Form\CredentialsType;
 use AppBundle\Entity\AuthToken;
 use AppBundle\Entity\Credentials;
+use AppBundle\Entity\User;
 
 /**
  * CommandeClient controller.
@@ -31,18 +32,20 @@ class AuthTokenController extends Controller
             return $form;
         }
          $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('AppBundle:User')->findOneByEmail($credentials->getLogin());
-
-        if (!$user) { // L'utilisateur n'existe pas
-            return $this->invalidCredentials();
+         $user = $em->getRepository('AppBundle:User')->findOneByEmail($credentials->getLogin());
+        if (!$user) { // L'utilisateur n'existe pas encore
+               $entity = new User();
+               $entity->setEnabled(true)->setRoles(array('ROLE_USER'));
+               $em->persist($entity);
+           // return $this->invalidCredentials();
         }
 
-        $encoder = $this->get('security.password_encoder');
-        $isPasswordValid = $encoder->isPasswordValid($user, $credentials->getPassword());
-
-        if (!$isPasswordValid) { // Le mot de passe n'est pas correct
+     /*  $encoder = $this->get('security.password_encoder');
+         $isPasswordValid = $encoder->isPasswordValid($user, $credentials->getPassword());
+         if (!$isPasswordValid) { // Le mot de passe n'est pas correct
             return $this->invalidCredentials();
-        }
+        }*/
+
         $authToken=AuthToken::create($user);
         $em->persist($authToken);
         $em->flush();
