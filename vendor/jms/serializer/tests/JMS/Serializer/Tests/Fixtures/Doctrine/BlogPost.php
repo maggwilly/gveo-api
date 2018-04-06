@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright 2013 Johannes M. Schmitt <schmittjoh@gmail.com>
+ * Copyright 2016 Johannes M. Schmitt <schmittjoh@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 namespace JMS\Serializer\Tests\Fixtures\Doctrine;
 
+use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\XmlAttribute;
@@ -81,6 +82,12 @@ class BlogPost
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Serializer\Exclude()
+     */
+    private $ref;
+
     public function __construct($title, Author $author, \DateTime $createdAt)
     {
         $this->title = $title;
@@ -98,5 +105,13 @@ class BlogPost
     public function addComment(Comment $comment)
     {
         $this->comments->add($comment);
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getRef()
+    {
+        return $this->ref;
     }
 }

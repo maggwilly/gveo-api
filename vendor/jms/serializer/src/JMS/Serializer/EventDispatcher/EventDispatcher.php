@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright 2013 Johannes M. Schmitt <schmittjoh@gmail.com>
+ * Copyright 2016 Johannes M. Schmitt <schmittjoh@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,7 +95,12 @@ class EventDispatcher implements EventDispatcherInterface
         }
 
         foreach ($this->classListeners[$eventName][$loweredClass][$format] as $listener) {
-            call_user_func($listener, $event);
+
+            if ($event->isPropagationStopped()) {
+                break;
+            }
+
+            call_user_func($listener, $event, $eventName, $loweredClass, $format, $this);
         }
     }
 

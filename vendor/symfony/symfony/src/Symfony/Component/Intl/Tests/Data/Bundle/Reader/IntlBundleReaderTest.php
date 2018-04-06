@@ -11,13 +11,14 @@
 
 namespace Symfony\Component\Intl\Tests\Data\Bundle\Reader;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Intl\Data\Bundle\Reader\IntlBundleReader;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @requires extension intl
  */
-class IntlBundleReaderTest extends \PHPUnit_Framework_TestCase
+class IntlBundleReaderTest extends TestCase
 {
     /**
      * @var IntlBundleReader
@@ -50,7 +51,7 @@ class IntlBundleReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadDoesNotFollowFallback()
     {
-        if (PHP_VERSION_ID < 50307 || PHP_VERSION_ID === 50400) {
+        if (\PHP_VERSION_ID < 50307 || \PHP_VERSION_ID === 50400) {
             $this->markTestSkipped('ResourceBundle handles disabling fallback properly only as of PHP 5.3.7 and 5.4.1.');
         }
 
@@ -70,7 +71,7 @@ class IntlBundleReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadDoesNotFollowFallbackAlias()
     {
-        if (PHP_VERSION_ID < 50307 || PHP_VERSION_ID === 50400) {
+        if (\PHP_VERSION_ID < 50307 || \PHP_VERSION_ID === 50400) {
             $this->markTestSkipped('ResourceBundle handles disabling fallback properly only as of PHP 5.3.7 and 5.4.1.');
         }
 

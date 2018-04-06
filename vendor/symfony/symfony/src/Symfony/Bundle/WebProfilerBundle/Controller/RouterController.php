@@ -20,6 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\HttpKernel\DataCollector\RequestDataCollector;
+use Twig\Environment;
 
 /**
  * RouterController.
@@ -33,7 +34,7 @@ class RouterController
     private $matcher;
     private $routes;
 
-    public function __construct(Profiler $profiler = null, \Twig_Environment $twig, UrlMatcherInterface $matcher = null, RouteCollection $routes = null)
+    public function __construct(Profiler $profiler = null, Environment $twig, UrlMatcherInterface $matcher = null, RouteCollection $routes = null)
     {
         $this->profiler = $profiler;
         $this->twig = $twig;
@@ -87,7 +88,7 @@ class RouterController
         $traceRequest = Request::create(
             $request->getPathInfo(),
             $request->getRequestServer()->get('REQUEST_METHOD'),
-            $request->getRequestAttributes()->all(),
+            array(),
             $request->getRequestCookies()->all(),
             array(),
             $request->getRequestServer()->all()

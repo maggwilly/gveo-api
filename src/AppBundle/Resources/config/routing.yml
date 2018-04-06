@@ -1,18 +1,18 @@
 app_reparation:
-    resource: "@AppBundle/Resources/config/routing/reparation.yml"   
-    prefix: /
+    resource: "@AppBundle/Resources/config/routing/formated.yml"   
+    prefix: /v1/formated
 
 app_vehicule:
     resource: "@AppBundle/Resources/config/routing/vehicule.yml"   
-    prefix: /vehicule
+    prefix: /v1/formated/vehicule
 
 app_utils:
     resource: "@AppBundle/Resources/config/routing/utils.yml"   
-    prefix: /utils
+    prefix: /v1/formated/utils
 
 app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"  
-    prefix: /user
+    prefix: /v1/formated/user
     
 auth-tokens:
     path:      /login

@@ -6,21 +6,24 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Unirest\\' => array($vendorDir . '/mashape/unirest-php/src'),
+    'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src'),
     'PhpCollection' => array($vendorDir . '/phpcollection/phpcollection/src'),
+    'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'JsonpCallbackValidator' => array($vendorDir . '/willdurand/jsonp-callback-validator/src'),
     'JMS\\SerializerBundle' => array($vendorDir . '/jms/serializer-bundle'),
     'JMS\\Serializer' => array($vendorDir . '/jms/serializer/src'),
     'JMS\\' => array($vendorDir . '/jms/parser-lib/src'),
+    'FOS\\UserBundle' => array($vendorDir . '/friendsofsymfony/user-bundle'),
     'FOS\\RestBundle' => array($vendorDir . '/friendsofsymfony/rest-bundle'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
+    'Doctrine\\Common\\DataFixtures' => array($vendorDir . '/doctrine/data-fixtures/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
-    'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
-    'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
 );

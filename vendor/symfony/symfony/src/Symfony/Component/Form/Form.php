@@ -408,6 +408,10 @@ class Form implements \IteratorAggregate, FormInterface
         }
 
         if (!$this->defaultDataSet) {
+            if ($this->lockSetData) {
+                throw new RuntimeException('A cycle was detected. Listeners to the PRE_SET_DATA event must not call getData() if the form data has not already been set. You should call getData() on the FormEvent object instead.');
+            }
+
             $this->setData($this->config->getData());
         }
 
@@ -428,6 +432,10 @@ class Form implements \IteratorAggregate, FormInterface
         }
 
         if (!$this->defaultDataSet) {
+            if ($this->lockSetData) {
+                throw new RuntimeException('A cycle was detected. Listeners to the PRE_SET_DATA event must not call getNormData() if the form data has not already been set.');
+            }
+
             $this->setData($this->config->getData());
         }
 
@@ -448,6 +456,10 @@ class Form implements \IteratorAggregate, FormInterface
         }
 
         if (!$this->defaultDataSet) {
+            if ($this->lockSetData) {
+                throw new RuntimeException('A cycle was detected. Listeners to the PRE_SET_DATA event must not call getViewData() if the form data has not already been set.');
+            }
+
             $this->setData($this->config->getData());
         }
 
@@ -748,7 +760,7 @@ class Form implements \IteratorAggregate, FormInterface
 
         return FormUtil::isEmpty($this->modelData) ||
             // arrays, countables
-            0 === count($this->modelData) ||
+            ((is_array($this->modelData) || $this->modelData instanceof \Countable) && 0 === count($this->modelData)) ||
             // traversables that are not countable
             ($this->modelData instanceof \Traversable && 0 === iterator_count($this->modelData));
     }

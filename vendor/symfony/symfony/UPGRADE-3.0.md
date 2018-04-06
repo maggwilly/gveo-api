@@ -1,6 +1,35 @@
 UPGRADE FROM 2.x to 3.0
 =======================
 
+# Table of Contents
+
+- [ClassLoader](#classloader)
+- [Config](#config)
+- [Console](#console)
+- [DependencyInjection](#dependencyinjection)
+- [DoctrineBridge](#doctrinebridge)
+- [DomCrawler](#domcrawler)
+- [EventDispatcher](#eventdispatcher)
+- [Form](#form)
+- [FrameworkBundle](#frameworkbundle)
+- [HttpFoundation](#httpfoundation)
+- [HttpKernel](#httpkernel)
+- [Locale](#locale)
+- [Monolog Bridge](#monolog-bridge)
+- [Process](#process)
+- [PropertyAccess](#propertyaccess)
+- [Routing](#routing)
+- [Security](#security)
+- [SecurityBundle](#securitybundle)
+- [Serializer](#serializer)
+- [Swiftmailer Bridge](#swiftmailer-bridge)
+- [Translator](#translator)
+- [Twig Bridge](#twig-bridge)
+- [TwigBundle](#twigbundle)
+- [Validator](#validator)
+- [WebProfiler](#webprofiler)
+- [Yaml](#yaml)
+
 ### ClassLoader
 
  * The `UniversalClassLoader` class has been removed in favor of
@@ -201,6 +230,9 @@ UPGRADE FROM 2.x to 3.0
    Note that the `query_builder` option of `DoctrineType` *does* support
    closures, but the closure is now resolved in the type instead of in the
    loader.
+
+ * Using the entity provider with a Doctrine repository implementing `UserProviderInterface` is not supported anymore.
+   You should make the repository implement `UserLoaderInterface` instead.
 
 ### EventDispatcher
 
@@ -1750,5 +1782,11 @@ UPGRADE FROM 2.x to 3.0
    After:
 
    ```php
-   $request->query->get('foo')[bar];
+   $request->query->get('foo')['bar'];
    ```
+### Monolog Bridge
+
+ * `Symfony\Bridge\Monolog\Logger::emerg()` was removed. Use `emergency()` which is PSR-3 compatible.
+ * `Symfony\Bridge\Monolog\Logger::crit()` was removed. Use `critical()` which is PSR-3 compatible.
+ * `Symfony\Bridge\Monolog\Logger::err()` was removed. Use `error()` which is PSR-3 compatible.
+ * `Symfony\Bridge\Monolog\Logger::warn()` was removed. Use `warning()` which is PSR-3 compatible.

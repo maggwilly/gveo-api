@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Twig\Environment;
 
 /**
  * ProfilerController.
@@ -39,11 +40,11 @@ class ProfilerController
      *
      * @param UrlGeneratorInterface $generator       The URL Generator
      * @param Profiler              $profiler        The profiler
-     * @param \Twig_Environment     $twig            The twig environment
+     * @param Environment           $twig            The twig environment
      * @param array                 $templates       The templates
      * @param string                $toolbarPosition The toolbar position (top, bottom, normal, or null -- use the configuration)
      */
-    public function __construct(UrlGeneratorInterface $generator, Profiler $profiler = null, \Twig_Environment $twig, array $templates, $toolbarPosition = 'normal')
+    public function __construct(UrlGeneratorInterface $generator, Profiler $profiler = null, Environment $twig, array $templates, $toolbarPosition = 'bottom')
     {
         $this->generator = $generator;
         $this->profiler = $profiler;
@@ -110,7 +111,7 @@ class ProfilerController
             'panel' => $panel,
             'page' => $page,
             'request' => $request,
-            'templates' => $this->getTemplateManager()->getTemplates($profile),
+            'templates' => $this->getTemplateManager()->getNames($profile),
             'is_ajax' => $request->isXmlHttpRequest(),
             'profiler_markup_version' => 2, // 1 = original profiler, 2 = Symfony 2.8+ profiler
         )), 200, array('Content-Type' => 'text/html'));
@@ -210,7 +211,7 @@ class ProfilerController
             'request' => $request,
             'position' => $position,
             'profile' => $profile,
-            'templates' => $this->getTemplateManager()->getTemplates($profile),
+            'templates' => $this->getTemplateManager()->getNames($profile),
             'profiler_url' => $url,
             'token' => $token,
             'profiler_markup_version' => 2, // 1 = original toolbar, 2 = Symfony 2.8+ toolbar

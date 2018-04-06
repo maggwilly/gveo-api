@@ -4,23 +4,29 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
+class ComposerStaticInit175f0206e21176052619464fb7779c4e
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'edc6464955a37aa4d5fbf39d40fb6ee7' => __DIR__ . '/..' . '/symfony/polyfill-php55/bootstrap.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '3e2471375464aac821502deb0ac64275' => __DIR__ . '/..' . '/symfony/polyfill-php54/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        'c15243c55ab4c20eff78d1e24be20dac' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Twig\\Extensions\\' => 16,
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Util\\' => 22,
@@ -50,11 +56,17 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         ),
         'N' => 
         array (
+            'Nelmio\\CorsBundle\\' => 18,
             'Negotiation\\' => 12,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Misteio\\CloudinaryBundle\\' => 25,
+        ),
+        'L' => 
+        array (
+            'Liuggio\\ExcelBundle\\' => 20,
         ),
         'I' => 
         array (
@@ -62,13 +74,29 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         ),
         'D' => 
         array (
+            'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
+            'Doctrine\\Common\\' => 16,
+            'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Twig\\Extensions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/extensions/src',
+        ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-util',
@@ -153,6 +181,10 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Nelmio\\CorsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nelmio/cors-bundle',
+        ),
         'Negotiation\\' => 
         array (
             0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
@@ -161,13 +193,37 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Misteio\\CloudinaryBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/misteio/cloudinary-bundle',
+        ),
+        'Liuggio\\ExcelBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liuggio/ExcelBundle',
+        ),
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
         ),
+        'Doctrine\\Instantiator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Doctrine\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
+        'Doctrine\\Bundle\\FixturesBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/doctrine-fixtures-bundle',
         ),
         'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 
         array (
@@ -177,6 +233,10 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
         ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -184,8 +244,19 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
     );
 
     public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Unirest\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/mashape/unirest-php/src',
+            ),
+        ),
         'T' => 
         array (
+            'Twig_Extensions_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/extensions/lib',
+            ),
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
@@ -207,6 +278,10 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
             'PhpCollection' => 
             array (
                 0 => __DIR__ . '/..' . '/phpcollection/phpcollection/src',
+            ),
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
             ),
         ),
         'M' => 
@@ -237,6 +312,10 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         ),
         'F' => 
         array (
+            'FOS\\UserBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/friendsofsymfony/user-bundle',
+            ),
             'FOS\\RestBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
@@ -260,17 +339,13 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
             array (
                 0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
+            'Doctrine\\Common\\DataFixtures' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/data-fixtures/lib',
+            ),
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
-            ),
-            'Doctrine\\Common\\Annotations\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
-            ),
-            'Doctrine\\Common\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/common/lib',
             ),
         ),
     );
@@ -281,9 +356,29 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'CallbackFilterIterator' => __DIR__ . '/..' . '/symfony/polyfill-php54/Resources/stubs/CallbackFilterIterator.php',
+        'Cloudinary' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Cloudinary.php',
+        'CloudinaryField' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/CloudinaryField.php',
+        'Cloudinary\\Api' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\AlreadyExists' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\AuthorizationRequired' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\BadRequest' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\Error' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\GeneralError' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\NotAllowed' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\NotFound' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\RateLimited' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\Api\\Response' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api.php',
+        'Cloudinary\\AuthToken' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/AuthToken.php',
+        'Cloudinary\\Error' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Uploader.php',
+        'Cloudinary\\PreloadedFile' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/PreloadedFile.php',
+        'Cloudinary\\Uploader' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Uploader.php',
         'Collator' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/Collator.php',
         'DivisionByZeroError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/DivisionByZeroError.php',
         'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
+        'Firebase\\Error' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseStub.php',
+        'Firebase\\FirebaseInterface' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseInterface.php',
+        'Firebase\\FirebaseLib' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseLib.php',
+        'Firebase\\FirebaseStub' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseStub.php',
         'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/IntlDateFormatter.php',
         'Locale' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/Locale.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/NumberFormatter.php',
@@ -297,11 +392,11 @@ class ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit7539a22f88d2fb7de7e8d08e1ab9c7fc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit175f0206e21176052619464fb7779c4e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit175f0206e21176052619464fb7779c4e::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit175f0206e21176052619464fb7779c4e::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit175f0206e21176052619464fb7779c4e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit175f0206e21176052619464fb7779c4e::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -197,6 +197,9 @@ table tbody ul {
 .nowrap {
     white-space: pre;
 }
+.prewrap {
+    white-space: pre-wrap;
+}
 .newline {
     display: block;
 }
@@ -250,12 +253,12 @@ table tbody ul {
 {# Metrics
    ------------------------------------------------------------------------- #}
 .metrics {
-    margin: 1em 0;
+    margin: 1em 0 0;
     overflow: auto;
 }
 .metrics .metric {
     float: left;
-    margin-right: 1em;
+    margin: 0 1em 1em 0;
 }
 
 .metric {
@@ -308,6 +311,12 @@ table tbody ul {
     margin: 0;
     padding-left: 4px;
     vertical-align: middle;
+}
+
+.metric-divider {
+    float: left;
+    margin: 0 1em;
+    min-height: 1px; {# required to apply 'margin' to an empty 'div' #}
 }
 
 {# Cards
@@ -424,7 +433,7 @@ tr.status-warning td {
 }
 #main {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     min-height: 100%;
 }
 #sidebar {
@@ -962,6 +971,18 @@ table.logs .sf-call-stack abbr {
     }
     #sidebar:hover .module, #sidebar.expanded .module {
         display: block;
+    }
+
+    #sidebar:not(:hover):not(.expanded) .label .count {
+        border-radius: 50%;
+        border: 1px solid #eee;
+        height: 8px;
+        min-width: 0;
+        padding: 0;
+        right: 4px;
+        text-indent: -9999px;
+        top: 50%;
+        width: 8px;
     }
 
     .visible-small {

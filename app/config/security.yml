@@ -1,38 +1,61 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
-
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_API:         ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
-    providers:
-        auth_token_user_provider:
-            id: auth_token_user_provider
-
-    firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js|utils)/
-            security: false
-            stateless: true
-            anonymous: true
-        public:
-      # since anonymous is allowed users will not be forced to login
-            pattern:  login|register
-            anonymous: true
-            security: false
-            stateless: true
-
-        main:
-            pattern: ^/
-            stateless: true
-            simple_preauth:
-                authenticator: auth_token_authenticator
-            provider: auth_token_user_provider
-            anonymous: ~
+        # Un admin hérite des droits d'auteur et de modérateur
+         ROLE_SAISIE:   [ROLE_USER, ROLE_SAISIE]
+         ROLE_SUPERVISEUR:   [ ROLE_SAISIE]
+         ROLE_CONTROLEUR:   [ROLE_SUPERVISEUR]
+         ROLE_ADMIN:   [ROLE_CONTROLEUR,ROLE_MESSAGER]
+         ROLE_DELEGUE:   [ROLE_ADMIN, ROLE_PRICER]
+        
+    access_control:
+        - { path: ^/v1/admin, roles: ROLE_ADMIN }   
+        - { path: ^/v1/ambassador, roles: IS_AUTHENTICATED_ANONYMOUSLY }   
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
 
     encoders:
-        AppBundle\Entity\User:
-            algorithm: bcrypt
-            cost: 12
+        AppBundle\Entity\User: sha512
+    providers:
+         main:
+            id: fos_user.user_provider.username_email
+           
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        
+        public:
+      # since anonymous is allowed users will not be forced to login
+           pattern:   ^/(login|register)$
+           anonymous:      true
+
+        mobile:
+      # since anonymous is allowed users will not be forced to login
+            pattern:   auth-token|mobile|formated|apk|update|xml|ambassador
+            anonymous: true
+            security: false
+            stateless: true
+        main:
+            pattern:        ^/
+            anonymous:      false
+            provider:       main
+            form_login:
+                 login_path: fos_user_security_login
+                 check_path: fos_user_security_check
+                 always_use_default_target_path: false
+                 default_target_path:  user_homepage          
+            logout:  
+                path:      fos_user_security_logout
+                target:    /login
+            remember_me:
+                key:        %secret% # %secret% est un paramètre de parameters.yml
+
+               
+            # activate different ways to authenticate
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
