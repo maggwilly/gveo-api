@@ -1,0 +1,20 @@
+entities_index:
+    path:     /{entityName}
+    defaults: { _controller: "AppBundle:Utils:index" }
+    methods:  GET
+
+marque_create:
+    path:     /marque/create
+    defaults: { _controller: "AppBundle:Utils:createMarque" }
+    methods:  [GET, POST]
+
+systeme_create:
+    path:     /systeme/create
+    defaults: { _controller: "AppBundle:Utils:createSysteme" }
+    methods:  [GET, POST]
+
+operation_create:
+    path:     /operation/create
+    defaults: { _controller: "AppBundle:Utils:createOperation" }
+    methods:  [GET, POST]
+

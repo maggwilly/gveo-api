@@ -1,14 +1,30 @@
-user_index:
-    path:     /
+user:
+    path:    /
     defaults: { _controller: "AppBundle:User:index" }
-    methods:  GET
 
-user_toggle:
-    path:     /{id}/toggle
-    defaults: { _controller: "AppBundle:User:toggleUser" }
-    methods:  GET
+user_show:
+    path:     /show
+    defaults: { _controller: "AppBundle:User:show" }
 
-user_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "AppBundle:User:edit" }
-    methods:  [GET, POST]
+user_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:User:new" }
+
+user_create:
+    path:     /register
+    defaults: { _controller: "AppBundle:User:create" }
+
+
+user_update:
+    path:     /update
+    defaults: { _controller: "AppBundle:User:update" }
+
+
+user_change_password:
+    path:     /change/password
+    defaults: { _controller: "AppBundle:User:chagePassword" }
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:User:delete" }
+    methods:  [POST, DELETE,GET]

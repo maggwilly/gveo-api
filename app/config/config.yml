@@ -129,11 +129,6 @@ fos_rest:
     serializer:
         serialize_null:  false
 
-misteio_cloudinary:
-  cloud_name: hsoqwbdhd
-  api_key: 776351678799743
-  secret_key: jxnj3InvfgRu_JQk1eTT54aVxdI
-
 nelmio_cors:
         defaults:
             allow_credentials: false

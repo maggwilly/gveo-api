@@ -1,0 +1,12 @@
+AppBundle\Entity\Police:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        startDate:
+            groups: ['full']
+        endDate:
+            groups: ['full']    
+        cout:
+            groups: ['full']        
+     

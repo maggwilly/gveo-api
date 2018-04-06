@@ -1,71 +1,94 @@
-resultat_index_json:
-    path:     /resultat/json
-    defaults: { _controller: "AppBundle:Resultat:jsonIndex"}
+reparations:
+    path:     /reparations/{idV}/{idO}/list
+    defaults: { _controller: "AppBundle:Reparation:reparations" }
     methods:  GET
 
-session_index_json:
-    path:     /session/json
-    defaults: { _controller: "AppBundle:Session:jsonIndex"}
+reparation_last:
+    path:     /reparation/{idV}/{idO}/last
+    defaults: { _controller: "AppBundle:Reparation:lastReparation" }
     methods:  GET
 
-session_recents_json:
-    path:     /session/recentment/lances/json
-    defaults: { _controller: "AppBundle:Session:jsonRecents"}
+police_last:
+    path:     /police/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastPolice" }
     methods:  GET
 
-session_owards_json:
-    path:     /session/owards/json
-    defaults: { _controller: "AppBundle:Session:jsonOwards"}
+visite_last:
+    path:     /visite/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastVisite" }
     methods:  GET
 
-session_envus_json:
-    path:     /session/plus/en/vus/json
-    defaults: { _controller: "AppBundle:Session:jsonEnVus"}
+releve_last:
+    path:     /releve/{idV}/last
+    defaults: { _controller: "AppBundle:Reparation:lastReleve" }
     methods:  GET
-
-session_for_user_json:
-    path:     /session/for/user/{id}/json
-    defaults: { _controller: "AppBundle:Session:jsonForUser"}
+couts:
+    path:     /couts/{idV}
+    defaults: { _controller: "AppBundle:Reparation:couts" }
     methods:  GET
+    
+maintenances:
+    path:     /maintenances/{idV}/{idS}/list
+    defaults: { _controller: "AppBundle:Reparation:maintenances" }
+    methods:  [GET, POST]
 
+reparation_create:
+    path:     /reparation/create
+    defaults: { _controller: "AppBundle:Reparation:createReparation" }
+    methods:  [GET, POST]
 
-session_show_json:
-    path:     /session/{id}/show/json
-    defaults: { _controller: "AppBundle:Session:showJson" }
-    methods:  GET
+maintenance_create:
+    path:     /maintenance/create
+    defaults: { _controller: "AppBundle:Reparation:createMaintenance" }
+    methods:  [GET, POST]
 
-session_follow_json:
-    path:     /session/{session}/{info}/follows/json
-    defaults: { _controller: "AppBundle:Session:follows" }
-    methods:  GET
+releve_create:
+    path:     /releve/create
+    defaults: { _controller: "AppBundle:Reparation:createReleve" }
+    methods:  [GET, POST]
 
+police_create:
+    path:     /police/create
+    defaults: { _controller: "AppBundle:Reparation:createPolice" }
+    methods:  [GET, POST]
+visite_create:
+    path:     /visite/create
+    defaults: { _controller: "AppBundle:Reparation:createVisite" }
+    methods:  [GET, POST]
 
-article_show_json:
-    path:     /article/{id}/show/json
-    defaults: { _controller: "AppBundle:Article:showJson" }
-    methods:  GET
+reparation_update:
+    path:     /reparation/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updateReparation" }
+    methods:  [GET, POST]
 
-articlefollow_json:
-    path:     /session/{article}/{info}/lire/cours/json
-    defaults: { _controller: "AppBundle:Article:lireCours" }
-    methods:  GET
+visite_update:
+    path:     /visite/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updateVisite" }
+    methods:  [GET, POST]
 
-matiere_index_json:
-    path:     /matiere/{id}/json
-    defaults: { _controller: "AppBundle:Matiere:jsonIndex", id:0  }
-    methods:  GET
+police_update:
+    path:     /police/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updatePolice" }
+    methods:  [GET, POST]
 
-partie_index_json:
-    path:     /partie/{id}/json
-    defaults: { _controller: "AppBundle:Partie:jsonIndex", id:0  }
-    methods:  GET
+    
+reparation_delete:
+    path:     /reparation/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteReparation" }
+    methods:  DELETE
 
-partie_is_avalable_json:
-    path:     /partie/is/avalable/json
-    defaults: { _controller: "AppBundle:Partie:isAvalable" }
-    methods:  GET
+maintance_delete:
+    path:     /maintenance/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteMaintenance" }
+    methods:  DELETE
 
-question_index_json:
-    path:     /question/{id}/json
-    defaults: { _controller: "AppBundle:Question:jsonIndex" }
-    methods:  GET
+police_delete:
+    path:     /police/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deletePolice" }
+    methods:  DELETE
+
+visite_delete:
+    path:     /visite/{id}/delete
+    defaults: { _controller: "AppBundle:Reparation:deleteVisite" }
+    methods:  DELETE
+

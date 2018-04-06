@@ -5,50 +5,39 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class UserType extends AbstractType
 {
     /**
-     * {@inheritdoc}
+     * @param FormBuilderInterface $builder
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')
-        ->add('ville')
-        ->add('username')
-        ->add('email')
-        ->add('roles', ChoiceType::class, array(
-                                  'choices'  => array(
-                                  'ROLE_SAISIE' => 'Editeur/correcteur',
-                                   'ROLE_AMBASSADOR' => 'Ambassadeur',
-                                   'ROLE_SUPERVISEUR' => 'Superviseur',
-                                   'ROLE_MESSAGER' => 'Push Messager',
-                                   'ROLE_CONTROLEUR' => 'Controleur',
-                                   'ROLE_ADMIN' => 'Administrateur'
-                                   ), 
-                                  'multiple'=>true,
-                                  'expanded'=>false,
-                                  'attr'=>array('data-rel'=>'chosen'),
-                                   ));
+        $builder
+            ->add('nom')
+            ->add('telephone')
+              ->add('langue')
+             ->add('email')
+              ->add('pays')
+            ->add('plainPassword');
+
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
+  public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\User',
+            'csrf_protection' => false,
+            'allow_extra_fields' => true
+       ]);
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function getBlockPrefix()
+    public function getName()
     {
         return 'appbundle_user';
     }
-
-
 }

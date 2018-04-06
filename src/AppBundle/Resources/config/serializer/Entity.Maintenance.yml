@@ -1,0 +1,15 @@
+AppBundle\Entity\Maintenance:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        dateSave:
+            groups: ['full']
+        cout:
+            groups: ['full']    
+        coutMainOeuvre:
+            groups: ['full']        
+        description:
+            groups: ['full']    
+        status:
+            groups: ['full']     

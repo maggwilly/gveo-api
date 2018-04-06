@@ -1,0 +1,23 @@
+AppBundle\Entity\Vehicule:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        matricule:
+            groups: ['full']
+        description:
+            groups: ['full']    
+        chauffeur:
+            groups: ['full'] 
+        index0:
+            groups: ['full']                  
+        coutAchat:
+            groups: ['full']        
+        marque:
+            groups: ['full']   
+        lastReleve:
+            groups: ['full']        
+        couts:
+            groups: ['full'] 
+        dateMiseEnCirculation:
+            groups: ['full'] 

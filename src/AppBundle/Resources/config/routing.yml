@@ -1,67 +1,24 @@
-homepage:
-    path:     /
-    defaults: { _controller: "AppBundle:App:index" }
-    methods:  GET
+app_reparation:
+    resource: "@AppBundle/Resources/config/routing/formated.yml"   
+    prefix: /v1/formated
 
-user_homepage:
-    path:     /
-    defaults: { _controller: "AppBundle:Programme:index" }
-    methods:  GET
+app_vehicule:
+    resource: "@AppBundle/Resources/config/routing/vehicule.yml"   
+    prefix: /v1/formated/vehicule
+
+app_utils:
+    resource: "@AppBundle/Resources/config/routing/utils.yml"   
+    prefix: /v1/formated/utils
 
 app_user:
-    resource: "@AppBundle/Resources/config/routing/user.yml"
-    prefix:   /user
-
-app_resultat:
-    resource: "@AppBundle/Resources/config/routing/resultat.yml"
-    prefix:   /resultat
+    resource: "@AppBundle/Resources/config/routing/user.yml"  
+    prefix: /v1/formated/user
     
-app_article:
-    resource: "@AppBundle/Resources/config/routing/article.yml"
-    prefix:   /article
+auth-tokens:
+    path:      /login
+    defaults: { _controller: "AppBundle:AuthToken:postAuthTokens" }
+    methods:  [POST,OPTIONS,GET]
 
-app_programme:
-    resource: "@AppBundle/Resources/config/routing/programme.yml"
-    prefix:   /programme
-
-app_session:
-    resource: "@AppBundle/Resources/config/routing/session.yml"
-    prefix:   /session
-
-
-app_concours:
-    resource: "@AppBundle/Resources/config/routing/concours.yml"
-    prefix:   /concours
-
-app_formated:
-    resource: "@AppBundle/Resources/config/routing/formated.yml"
-    prefix:   /formated
-
-app_matiere:
-    resource: "@AppBundle/Resources/config/routing/matiere.yml"
-    prefix:   /matiere
-
-app_partie:
-    resource: "@AppBundle/Resources/config/routing/partie.yml"
-    prefix:   /partie
-
-app_objectif:
-    resource: "@AppBundle/Resources/config/routing/objectif.yml"
-    prefix:   /objectif
-
-app_question:
-    resource: "@AppBundle/Resources/config/routing/question.yml"
-    prefix:   /question
-
-app_content:
-    resource: "@AppBundle/Resources/config/routing/content.yml"
-    prefix:   /content
-
-app_explicationt:
-    resource: "@AppBundle/Resources/config/routing/explication.yml"
-    prefix:   /explication
-
-create_token:
-    path:      /mobile/create/auth-token
-    defaults: { _controller: "AppBundle:Mobile:postAuthTokens" }
-    methods:  POST
+auth-tokens_delete:
+    path:      /token/delete
+    defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }

@@ -1,10 +1,11 @@
+# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_pgsql 
-    database_host: ec2-184-72-248-8.compute-1.amazonaws.com
+    database_host: ec2-174-129-253-133.compute-1.amazonaws.com
     database_port: 5432
-    database_name: dd55upjjo3bsh
-    database_user: bcwqtlipjjlalw
-    database_password: 40598b76f4c60ba212411ef197d49c8a4e9b3ed8a9094bc27af96d6af278cc1c
+    database_name: d9kmmmqqu6311p
+    database_user: iuiqgkfnkmxnzi
+    database_password: d80507f932243f1e99e281e7d0507537b582fa5920b7b8bc84b32e2673702dfa
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

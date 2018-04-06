@@ -1,233 +1,96 @@
 <?php
 
 namespace AppBundle\Entity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
-
 
 /**
- * /**
- * @ORM\Table(name="user_account")
+ * User
+ * @ORM\Table(name="account",uniqueConstraints={@ORM\UniqueConstraint(name="users_email_unique", columns={"email"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
-  *@ORM\HasLifecycleCallbacks()
  */
-class User extends BaseUser
+class User implements UserInterface
 {
-    
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
-	
+    private $id;
 
     /**
      * @var string
-     * @ORM\Column(name="nom", type="string", length=255,nullable=true)
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
+     */
+    private $telephone;
    /**
      * @var string
-     * @ORM\Column(name="ville", type="string", length=255,nullable=true)
+     *
+     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $ville;
-
-
-   /**
+    private $email;
+    /**
      * @var string
-     * @ORM\Column(name="type", type="string", length=255,nullable=true)
+     *
+     * @ORM\Column(name="langue", type="string", length=255, nullable=true)
      */
-    private $type;
+    private $langue;
 
-
-   /**
+       /**
      * @var string
-     * @ORM\Column(name="phone", type="string", length=255,nullable=true)
+     *
+     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
      */
-    private $phone;
-
+    private $pays; 
      /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255,unique=true)
-     */
-    protected $username;
-
-        /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string")
+     * @ORM\Column(type="string", length=700, nullable=true)
      */
     protected $password;
 
-    /**
-     * Plain password. Used for model validation. Must not be persisted.
-     *
-     * @var string
-     */
     protected $plainPassword;
 
-
-     /**
-     * @var string
+  /**
+     * @var boolean
      *
-     * @ORM\Column(name="usernameCanonical", type="string", length=180, unique=true, nullable=false)
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    protected $usernameCanonical;
-
-   /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=180)
-     */
-    protected $email;
+    private $enabled;
+    private $accountNonExpired;
+    private $credentialsNonExpired;
+    private $accountNonLocked;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="emailCanonical", type="string", length=180, unique=true)
-     */
-    protected $emailCanonical;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="enabled", type="boolean",nullable=true)
-     */
-    protected $enabled;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string")
-     */
-    protected $salt;
-
-
-   /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="lastLogin", type="datetime", nullable=true)
-     */
-    protected $lastLogin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="confirmationToken", type="string", length=180,unique=true ,nullable=true)
-     */
-    protected $confirmationToken;
-
-   /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="passwordRequestedAt", type="datetime" , nullable=true)
-     */
-    protected $passwordRequestedAt;
-
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="locked", type="boolean",nullable=true)
-     */
-    protected $locked;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="expired", type="boolean",nullable=true)
-     */
-    protected $expired;
-
-     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="expiresAt", type="datetime",nullable=true)
-     */
-    protected $expiresAt;
-
-     /**
      * @var array
      *
      * @ORM\Column(name="roles", type="array")
      */
-    protected $roles;
+    private $roles;
 
-     /**
-     * @var bool
-     *
-     * @ORM\Column(name="credentialsExpired", type="boolean",nullable=true)
-     */
-    protected $credentialsExpired;
-
-     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="credentialsExpireAt", type="datetime",nullable=true)
-     */
-    protected $credentialsExpireAt;
-
-    /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Partie", mappedBy="user")
-   * @ORM\OrderBy({ "id" = "ASC"})
-   */
-    private $parties;
-
-
-    /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Session", mappedBy="user")
-   * @ORM\OrderBy({ "id" = "ASC"})
-   */
-    private $sessions;
-
-    /**
-     * Constructor
-     */
- 
- public function __construct()
+    public function __construct($username=null, $password=null, array $roles = array(), $enabled = true, $userNonExpired = true, $credentialsNonExpired = true, $userNonLocked = true)
     {
-        parent::__construct();
-        //  $this->expiresAt=new \DateTime();
-         $this->parties = new \Doctrine\Common\Collections\ArrayCollection();
-         $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->telephone = $username;
+        $this->password = $password;
+        $this->enabled = $enabled;
+        $this->accountNonExpired = $userNonExpired;
+        $this->credentialsNonExpired = $credentialsNonExpired;
+        $this->accountNonLocked = $userNonLocked;
+        $this->roles = $roles;
     }
 
- /**
-  * @ORM\PrePersist()
- */
- public function prePersist(){
-      
-    switch ( $this->type) {
-        case 'SAISIE':
-            $this->roles=['ROLE_USER','ROLE_SAISIE'];
-            break;
-         case 'COMM':
-             $this->roles=['ROLE_USER','ROLE_MESSAGER'];
-            break  ;   
-         case 'AMBAS':
-             $this->roles=['ROLE_USER','ROLE_AMBASSADOR'];
-            break  ; 
-         case 'SUPERVISEUR':
-             $this->roles=['ROLE_USER','ROLE_SUPERVISEUR'];
-            break  ;  
-         case 'CONTROLEUR':
-             $this->roles=['ROLE_USER','ROLE_CONTROLEUR'];
-            break ;                                                
-        default:
-            $this->roles=['ROLE_USER','ROLE_ADMIN'];
-        break;
-    }
- } 
-  
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -238,7 +101,8 @@ class User extends BaseUser
      * Set nom
      *
      * @param string $nom
-     * @return Client
+     *
+     * @return User
      */
     public function setNom($nom)
     {
@@ -248,44 +112,146 @@ class User extends BaseUser
     }
 
     /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return Client
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-   
-    /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
         return $this->nom;
     }
 
-
-
-
-
-    public function __toString()
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     *
+     * @return User
+     */
+    public function setTelephone($telephone)
     {
-        return $this->getUsername();
+        $this->telephone = $telephone;
+        $this->username = $telephone;
+
+        return $this;
     }
 
-      /**
-     * Get parties
+
+
+    /**
+     * Get telephone
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return string
      */
-    public function getParties()
+    public function getTelephone()
     {
-        return $this->parties;
+        return $this->telephone;
+    }
+
+   
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+         return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+         return $this;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles=array())
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->telephone;
+    }
+
+    public function eraseCredentials()
+    {
+        // Suppression des données sensibles
+        $this->plainPassword = null;
+    }
+
+ 
+    public function isAccountNonExpired()
+    {
+        return $this->accountNonExpired;
+    }
+
+  
+    public function isAccountNonLocked()
+    {
+        return $this->accountNonLocked;
+    }
+
+
+    public function isCredentialsNonExpired()
+    {
+        return $this->credentialsNonExpired;
+    }
+
+
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+public function setEnabled($enabled)
+    {
+         $this->enabled=$enabled;
+        return $this;
+    }
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -298,185 +264,51 @@ class User extends BaseUser
         return $this->enabled;
     }
 
+   
+
     /**
-     * Set salt
+     * Set langue
      *
-     * @param string $salt
-     * @return Client
+     * @param string $langue
+     * @return User
      */
-    public function setSalt($salt)
+    public function setLangue($langue)
     {
-        $this->salt = $salt;
+        $this->langue = $langue;
 
         return $this;
     }
 
     /**
-     * Get locked
-     *
-     * @return boolean 
-     */
-    public function getLocked()
-    {
-        return $this->locked;
-    }
-
-    /**
-     * Get locked
-     *
-     * @return boolean 
-     */
-    public function setLocked($locked)
-    {
-        $this->locked=$locked;
-        return $this;
-    }
-
-    /**
-     * Get expired
-     *
-     * @return boolean 
-     */
-    public function getExpired()
-    {
-        return $this->expired;
-    }
-
-    /**
-     * Get expiresAt
-     *
-     * @return \DateTime 
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * Get credentialsExpired
-     *
-     * @return boolean 
-     */
-    public function getCredentialsExpired()
-    {
-        return $this->credentialsExpired;
-    }
-
-    /**
-     * Get credentialsExpireAt
-     *
-     * @return \DateTime 
-     */
-    public function getCredentialsExpireAt()
-    {
-        return $this->credentialsExpireAt;
-    }
-
-
-
-        /**
-     * Set ville
-     *
-     * @param string $ville
-     * @return PointVente
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
+     * Get langue
      *
      * @return string 
      */
-    public function getVille()
+    public function getLangue()
     {
-        return $this->ville;
+        return $this->langue;
     }
 
     /**
-     * Set type
+     * Set pays
      *
-     * @param string $type
-     *
+     * @param string $pays
      * @return User
      */
-    public function setType($type)
+    public function setPays($pays)
     {
-        $this->type = $type;
+        $this->pays = $pays;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get pays
      *
-     * @return string
+     * @return string 
      */
-    public function getType()
+    public function getPays()
     {
-        return $this->type;
+        return $this->pays;
     }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-     /**
-     * Add session
-     *
-     * @param \AppBundle\Entity\Session $session
-     *
-     * @return Concours
-     */
-    public function addSession(\AppBundle\Entity\Session $session)
-    {
-       $session->setUser($this);
-        $this->sessions[] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Remove session
-     *
-     * @param \AppBundle\Entity\Session $session
-     */
-    public function removeSession(\AppBundle\Entity\Session $session)
-    {
-        $this->sessions->removeElement($session);
-    }
-
-    /**
-     * Get sessions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSessions()
-    {
-        return $this->sessions;
-    }   
 }

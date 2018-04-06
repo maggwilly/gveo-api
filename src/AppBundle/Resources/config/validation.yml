@@ -1,0 +1,25 @@
+AppBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        nom:
+            - NotBlank: ~
+            - Type: string
+        email:
+            - NotBlank:  ~
+            - Type: string
+        plainPassword:
+            - NotBlank: { groups: ['changePasseword'] }
+            - Type: string
+            - Length:
+                min: 4
+                max: 50
+
+
+AppBundle\Entity\Credentials:
+    properties:
+        login:
+            - NotBlank: ~
+            - Type: string
+        password:
+            - Type: string

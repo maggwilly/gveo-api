@@ -14,20 +14,23 @@ class CredentialsType extends AbstractType
     }
 
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Credentials',
-            'csrf_protection' => false,
-            'allow_extra_fields' => true
-        ]);
+            'csrf_protection' => false
+        ));
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'appbundle_credentials';
     }
+
 }
