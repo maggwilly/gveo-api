@@ -7,3 +7,5 @@ AppBundle\Entity\Releve:
             groups: ['full']      
         km:
             groups: ['full']       
+        expired:
+            groups: ['full'] 

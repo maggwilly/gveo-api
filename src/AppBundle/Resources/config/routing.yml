@@ -1,10 +1,6 @@
 app_reparation:
     resource: "@AppBundle/Resources/config/routing/formated.yml"   
-    prefix: /v1/formated
-
-app_vehicule:
-    resource: "@AppBundle/Resources/config/routing/vehicule.yml"   
-    prefix: /v1/formated/vehicule
+    prefix: /v1/formated/utils
 
 app_utils:
     resource: "@AppBundle/Resources/config/routing/utils.yml"   

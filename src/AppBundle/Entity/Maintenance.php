@@ -35,6 +35,7 @@ class Maintenance implements InfoInterface
      */
     private $cout;
 
+
     /**
      * @var string
      *
@@ -52,7 +53,14 @@ class Maintenance implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="commentaires", type="text", length=255)
+     */
+    private $commentaires;
+
+        /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=255)
      */
     private $description;
   /**
@@ -153,6 +161,38 @@ class Maintenance implements InfoInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Maintenance
+     */
+    public function setCommentaires($description)
+    {
+        $this->commentaires = $description;
 
         return $this;
     }

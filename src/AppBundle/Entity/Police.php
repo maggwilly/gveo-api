@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 use AppBundle\Form\PoliceType;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\Accessor;
 /**
  * Police
  *
@@ -21,6 +21,9 @@ class Police implements InfoInterface
      */
     private $id;
 
+   /** @Accessor(getter="isExpired") 
+   */
+     private $expired;
     /**
      * @var \DateTime
      *
@@ -192,5 +195,16 @@ class Police implements InfoInterface
     public function getClassType()
     {
         return PoliceType::class;
+    }
+
+         /**
+     * Get vehicule
+     *
+     * @return \AppBundle\Entity\Vehicule 
+     */
+    public function isExpired()
+    {
+        $this->expired=($this->startDate>=$this->endDate);
+        return $this->expired;
     }
 }

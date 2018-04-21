@@ -83,6 +83,8 @@ class Operation implements InfoInterface
      */
     private $conseil;
 
+    private $todo;
+
     /**
      * @var string
      *
@@ -107,7 +109,28 @@ class Operation implements InfoInterface
     {
         return $this->id;
     }
+    /**
+     * Set numroOrdre
+     *
+     * @param integer $numroOrdre
+     * @return Operation
+     */
+    public function setTodo($todo)
+    {
+        $this->todo = $todo;
 
+        return $this;
+    }
+
+    /**
+     * Get numroOrdre
+     *
+     * @return integer 
+     */
+    public function getTodo()
+    {
+        return $this->todo;
+    }
     /**
      * Set numroOrdre
      *

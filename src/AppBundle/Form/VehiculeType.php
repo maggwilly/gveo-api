@@ -14,7 +14,7 @@ class VehiculeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('matricule')
-        ->add('lastIndex')
+        ->add('index0')
         ->add('chauffeur')
         ->add('description')
         ->add('coutAchat')

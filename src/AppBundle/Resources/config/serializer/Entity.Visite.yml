@@ -5,8 +5,13 @@ AppBundle\Entity\Visite:
             groups: ['full']
         startDate:
             groups: ['full']
+            expose: true
+            type: DateTime<'Y-m-d'>            
         endDate:
-            groups: ['full']    
+            groups: ['full'] 
+            expose: true
+            type: DateTime<'Y-m-d'>               
         cout:
             groups: ['full']        
-     
+        expired:
+            groups: ['full'] 

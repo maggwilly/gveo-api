@@ -4,31 +4,46 @@ reparations:
     methods:  GET
 
 reparation_last:
-    path:     /reparation/{idV}/{idO}/last
+    path:     /reparation/last
     defaults: { _controller: "AppBundle:Reparation:lastReparation" }
     methods:  GET
 
 police_last:
-    path:     /police/{idV}/last
+    path:     /police/last
     defaults: { _controller: "AppBundle:Reparation:lastPolice" }
     methods:  GET
 
 visite_last:
-    path:     /visite/{idV}/last
+    path:     /visite/last
     defaults: { _controller: "AppBundle:Reparation:lastVisite" }
     methods:  GET
 
+operation_todo:
+    path:     /operation/todos
+    defaults: { _controller: "AppBundle:Reparation:todos" }
+    methods:  GET
+
+is_todos:
+    path:     /is/todos
+    defaults: { _controller: "AppBundle:Reparation:isTodos" }
+    methods:  GET
+
+nedd_control:
+    path:     /need/control
+    defaults: { _controller: "AppBundle:Reparation:needControl" }
+    methods:  GET
+
 releve_last:
-    path:     /releve/{idV}/last
+    path:     /releve/last
     defaults: { _controller: "AppBundle:Reparation:lastReleve" }
     methods:  GET
 couts:
-    path:     /couts/{idV}
+    path:     /couts
     defaults: { _controller: "AppBundle:Reparation:couts" }
     methods:  GET
     
 maintenances:
-    path:     /maintenances/{idV}/{idS}/list
+    path:     /maintenances/list
     defaults: { _controller: "AppBundle:Reparation:maintenances" }
     methods:  [GET, POST]
 
@@ -59,17 +74,17 @@ visite_create:
 reparation_update:
     path:     /reparation/{id}/update
     defaults: { _controller: "AppBundle:Reparation:updateReparation" }
-    methods:  [GET, POST]
+    methods:  [GET, POST,PUT]
 
 visite_update:
     path:     /visite/{id}/update
     defaults: { _controller: "AppBundle:Reparation:updateVisite" }
-    methods:  [GET, POST]
+    methods:  [GET, POST,PUT]
 
 police_update:
     path:     /police/{id}/update
     defaults: { _controller: "AppBundle:Reparation:updatePolice" }
-    methods:  [GET, POST]
+    methods:  [GET, POST,PUT]
 
     
 reparation_delete:
@@ -92,3 +107,22 @@ visite_delete:
     defaults: { _controller: "AppBundle:Reparation:deleteVisite" }
     methods:  DELETE
 
+vehicule_index:
+    path:     /vehicule
+    defaults: { _controller: "AppBundle:Vehicule:index" }
+    methods:  GET
+
+vehicule_create:
+    path:     /vehicule/create
+    defaults: { _controller: "AppBundle:Vehicule:createVehicule" }
+    methods:  [GET, POST]
+
+vehicule_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Vehicule:updateVehicule" }
+    methods:  [GET, POST,PUT]
+
+vehicule_delete:
+    path:     /vehicule/{id}/delete
+    defaults: { _controller: "AppBundle:Vehicule:deleteVehicule" }
+    methods:  [DELETE,GET]

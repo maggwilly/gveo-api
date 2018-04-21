@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 use AppBundle\Form\VisiteType;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\Accessor;
 /**
  * Visite
  *
@@ -53,6 +53,9 @@ class Visite implements InfoInterface
      */
     private $vehicule;
 
+   /** @Accessor(getter="isExpired") 
+   */
+    private $expired;
             /**
      * Constructor
      */
@@ -193,5 +196,14 @@ class Visite implements InfoInterface
     {
         return VisiteType::class;
     }
-
+     /**
+     * Get vehicule
+     *
+     * @return \AppBundle\Entity\Vehicule 
+     */
+    public function isExpired()
+    {
+        $this->expired=($this->startDate>=$this->endDate);
+        return $this->expired;
+    }
 }

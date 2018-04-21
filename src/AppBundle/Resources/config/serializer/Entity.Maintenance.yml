@@ -11,5 +11,5 @@ AppBundle\Entity\Maintenance:
             groups: ['full']        
         description:
             groups: ['full']    
-        status:
+        commentaires:
             groups: ['full']     

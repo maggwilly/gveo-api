@@ -27,7 +27,7 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $reparations = $em->getRepository('AppBundle:Reparation')->findByVehicule($request->get('idV'),$request->get('idO'));
+        $reparations = $em->getRepository('AppBundle:Reparation')->findByVehicule($request->get('vehicule'),$request->get('operation'));
 
         return  $reparations;
       
@@ -41,8 +41,32 @@ class ReparationController extends Controller
     public function coutsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-       return $this->couts($request->get('idV'), $request->get('annee'));
+        $startDate=new \Datetime(date('Y').'-01-01');
+        $endDate=new \Datetime(date('Y').'-12-31');
+        $periode=$request->get('periode');
+       switch ($periode) {
+           case 'lastmonth':
+            $startDate->modify('first day of last month');
+            $endDate->modify('last day of last month');
+               break;
+           case 'lastyear':
+               $startDate->modify('first day of last year');
+               $endDate->modify('last day of last year');
+               break;
+           case 'thismonth':
+                $startDate->modify('first day of this month');
+                $endDate->modify('last day of this  month');
+               break; 
+           case 'thisyear':
+                $startDate->modify('first day of this year');
+                $endDate->modify('last day of this  year');
+               break;                                         
+           default:
+                $startDate=\DateTime::createFromFormat('d/m/Y', $request->get('startdate'));
+                $endDate=\DateTime::createFromFormat('d/m/Y', $request->get('enddate'));
+               break;
+       }
+       return $this->couts($request->get('uid'),$request->get('vehicule'), $startDate, $endDate);
       
     }
 
@@ -58,10 +82,78 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $reparation = $em->getRepository('AppBundle:Reparation')->findLastByVehicule($request->get('idV'),$request->get('idO'));
+        $reparation = $em->getRepository('AppBundle:Reparation')
+        ->findLastByVehicule($request->get('vehicule'),$request->get('operation'));
 
         return  $reparation;
       
+    }
+
+        /**
+     * Creates a new Produit entity.
+     *@Rest\View(serializerGroups={"full"})
+     */
+    public function todosAction(Request $request)
+    {
+        $vehicule=$request->get('vehicule');
+        return   $this->todos($vehicule);
+    }
+
+        /**
+     * Creates a new Produit entity.
+     *@Rest\View(serializerGroups={"full"})
+     */
+    public function isTodosAction(Request $request)
+    {
+        $uid=$request->query->get('uid'); 
+         $em = $this->getDoctrine()->getManager();
+        $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
+        $vehicules = $em->getRepository('AppBundle:Vehicule')->findByUser( $info);
+        foreach ( $vehicules as $key => $vehicule) {
+            if(!empty($this->todos($vehicule)))
+                return true;
+        }
+        return   false;
+    }
+
+       /**
+     * Creates a new Produit entity.
+     *@Rest\View(serializerGroups={"full"})
+     */
+    public function needControlAction(Request $request)
+    {
+        $uid=$request->query->get('uid'); 
+         $em = $this->getDoctrine()->getManager();
+        $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
+        $vehicules = $em->getRepository('AppBundle:Vehicule')->findByUser( $info);
+        foreach ( $vehicules as $key => $vehicule) {
+             $visite = $em->getRepository('AppBundle:Visite')->findLastByVehicule($vehicule);
+            if(is_null($visite)||$visite->isExpired())
+                return true;
+             $police = $em->getRepository('AppBundle:Police')->findLastByVehicule($vehicule);
+            if(is_null($police)||$police->isExpired())
+                return true;
+        }
+        return   false;
+    }
+
+
+
+    public function todos($vehicule)
+    {
+        $todos=array();
+        $em = $this->getDoctrine()->getManager();
+        $operations = $em->getRepository('AppBundle:Operation')->findAll();
+        foreach ($operations as $key => $operation) {
+            $reparation = $em->getRepository('AppBundle:Reparation')
+        ->findLastByVehicule($vehicule,$operation);
+        if(is_null($reparation))
+            $todos[]=$operation->setTodo('Vérifier et renseigner');
+         elseif($reparation->isExpired()) {
+             $todos[]=$operation->setTodo('Contrôler et remplacer');
+         }
+        }
+        return   $todos;
     }
 
             /**
@@ -72,7 +164,7 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $police = $em->getRepository('AppBundle:Police')->findLastByVehicule($request->get('idV'));
+        $police = $em->getRepository('AppBundle:Police')->findLastByVehicule($request->get('vehicule'));
 
         return  $police;
       
@@ -86,7 +178,7 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $visite = $em->getRepository('AppBundle:Visite')->findLastByVehicule($request->get('idV'));
+        $visite = $em->getRepository('AppBundle:Visite')->findLastByVehicule($request->get('vehicule'));
 
         return  $visite;
       
@@ -99,28 +191,25 @@ class ReparationController extends Controller
     public function lastReleveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($request->get('idV'));
-
+        $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($request->get('vehicule'));
         return  $releve;
-      
     }
 
-    public function couts($entity, $annee=0)
+    public function couts($uid,$entity, \Datetime $startDate,\Datetime $endDate)
     {    $em = $this->getDoctrine()->getManager();
-        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);
-        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($entity, $annee);
-        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($entity, $annee);
-        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($entity, $annee);
+        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($uid,$entity, $startDate,$endDate);
+        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($uid,$entity, $startDate,$endDate);
+        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($uid,$entity, $startDate,$endDate);
+        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($uid,$entity, $startDate,$endDate);
         return  array(
-            'coutReparations'=>$coutReparations,
-            'coutPolices'=>$coutPolices,
-            'coutVisites'=>$coutVisites,
-            'coutMaintenances'=>$coutMaintenances,
+            'preventive'=>($coutReparations+0),
+            'legislation'=>($coutVisites+$coutPolices),
+            'cuirative'=>($coutMaintenances+0),
             'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
             );
-
     }
+
+
     /**
      * Creates a new Produit entity.
      *@Rest\View(serializerGroups={"full"})
@@ -128,7 +217,7 @@ class ReparationController extends Controller
     public function maintenancesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $maintenances = $em->getRepository('AppBundle:Maintenance')->findByVehicule($request->get('idV'),$request->get('idS'));
+        $maintenances = $em->getRepository('AppBundle:Maintenance')->findByVehicule($request->get('vehicule'),$request->get('systeme'));
         return  $maintenances;
       
     }

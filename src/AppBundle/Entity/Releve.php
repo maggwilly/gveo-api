@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 use AppBundle\Form\ReleveType;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\Accessor;
 /**
  * Releve
  *
@@ -41,6 +41,9 @@ class Releve implements InfoInterface
      */
     private $vehicule;
 
+   /** @Accessor(getter="isExpired") 
+   */
+     private $expired;
         /**
      * Constructor
      */
@@ -138,4 +141,17 @@ class Releve implements InfoInterface
     {
         return ReleveType::class;
     }
+
+        /**
+     * Get vehicule
+     *
+     * @return \AppBundle\Entity\Vehicule 
+     */
+    public function isExpired()
+    {
+       $now= new \DateTime("now");
+      $now->modify('-4 day');
+        $this->expired=$now>=$this->dateSave;
+        return $this->expired;
+    } 
 }

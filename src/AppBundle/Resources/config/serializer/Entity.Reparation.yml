@@ -11,3 +11,5 @@ AppBundle\Entity\Reparation:
             groups: ['full']        
         km:
             groups: ['full']       
+        expired:
+            groups: ['full'] 

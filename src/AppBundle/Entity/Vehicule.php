@@ -32,7 +32,7 @@ class Vehicule implements InfoInterface
        /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
     /**
@@ -46,7 +46,7 @@ class Vehicule implements InfoInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="index0", type="integer")
+     * @ORM\Column(name="index0", type="integer", nullable=true)
      */
     private $index0;
 
@@ -59,7 +59,7 @@ class Vehicule implements InfoInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="coutAchat", type="integer")
+     * @ORM\Column(name="cout_achat", type="integer", nullable=true)
      */
     private $coutAchat;
 
@@ -75,23 +75,26 @@ class Vehicule implements InfoInterface
      * @var Vehicule
      */
     private $marque;
-  /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @var User
-     */
-    protected $user;
+
+     /**
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Info", inversedBy="vehicules", cascade={"persist"})
+   * @ORM\JoinColumn(referencedColumnName="uid")
+   */
+     private  $info;
 
    /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Releve", mappedBy="vehicule", cascade={"persist","remove"})
+   * @ORM\OrderBy({"id" = "ASC"})
    */
     private $releves;   
 
         /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(\AppBundle\Entity\Info $info = null)
     {
         $this->releves = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->info=$info;
     }
     /**
      * Get id
@@ -116,12 +119,11 @@ class Vehicule implements InfoInterface
         return $this;
     }
 /**
-* @ORM\PrePersist
+* @ORM\PrePersist()
 */
 public function prePersist(){
-    $this->index0=$this->lastIndex;
     $releve= new Releve($this->index0);
-   $this->addRelefe($releve);  
+   $this->addReleve($releve);  
 }
 
 /**
@@ -130,8 +132,8 @@ public function prePersist(){
 */
 public function preUpdate(){
 
-    $releve= new Releve($this->lastIndex);
-     $this->addRelefe($releve);  
+    //$releve= new Releve($this->lastIndex);
+    // $this->addRelefe($releve);  
 }
     /**
      * Get matricule
@@ -242,6 +244,8 @@ public function preUpdate(){
      */
     public function getLastReleve()
     {
+        if(is_null($this->lastReleve)&&!empty($this->releves))
+            return $this->releves->last();
         return $this->lastReleve;
     }
 
@@ -280,27 +284,7 @@ public function preUpdate(){
 
         return $this;
     }
-    /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\User $user
-     * @return Vehicule
-     */
-    public function setUser(\AppBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
 
-        return $this;
-    }
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
                       /**
      * Get virifiedAt
@@ -365,7 +349,7 @@ public function preUpdate(){
      * @param \AppBundle\Entity\Releve $releves
      * @return Vehicule
      */
-    public function addRelefe(\AppBundle\Entity\Releve $releve)
+    public function addReleve(\AppBundle\Entity\Releve $releve)
     {
         $releve->setVehicule($this);
         $this->releves[] = $releve;
@@ -378,7 +362,7 @@ public function preUpdate(){
      *
      * @param \AppBundle\Entity\Releve $releves
      */
-    public function removeRelefe(\AppBundle\Entity\Releve $releves)
+    public function removeReleve(\AppBundle\Entity\Releve $releves)
     {
         $this->releves->removeElement($releves);
     }
@@ -414,5 +398,29 @@ public function preUpdate(){
     public function getLastIndex()
     {
         return $this->lastIndex;
+    }
+
+        /**
+     * Set info
+     *
+     * @param \Pwm\AdminBundle\Entity\Info $info
+     *
+     * @return Registration
+     */
+    public function setInfo(\AppBundle\Entity\Info $info = null)
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * Get info
+     *
+     * @return \Pwm\AdminBundle\Entity\Info
+     */
+    public function getInfo()
+    {
+        return $this->info;
     }
 }

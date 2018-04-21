@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les annotations
+use AppBundle\Entity\Info;
 /**
  * Vehicule controller.
  *
@@ -22,15 +23,29 @@ class VehiculeController extends Controller
      * Creates a new Produit entity.
      *@Rest\View(serializerGroups={"full"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-   $entity = $this->getConnectedUser();
-       if (!$entity) {
-           throw $this->createNotFoundException('Unable to find user entity.');
-          }
-           $em = $this->getDoctrine()->getManager();
-        $vehicules = $em->getRepository('AppBundle:Vehicule')->findByUser($entity);
-
+         $em = $this->getDoctrine()->getManager();
+          $uid=$request->query->get('uid');   
+          $registrationId=$request->query->get('registrationId');   
+         $url= "https://trainings-fa73e.firebaseio.com/users/".$uid.".json";
+         $res = $this->get('fmc_manager')->sendOrGetData($url,null,'GET');  
+        
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
+         $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('registrationId'));
+           if(is_null($info)){
+            $info = new Info($uid);
+            $form = $this->createForm('AppBundle\Form\InfoType',$info);
+            $form->submit($res,false);
+            if (!$form->isValid())
+                 return $form; 
+                $em->persist($info); 
+                 $em->flush(); 
+              }
+            if($registration!=null)
+                $registration->setInfo($info);
+            $em->flush();  
+        $vehicules = $em->getRepository('AppBundle:Vehicule')->findByUser( $info);
         return  $vehicules;
     }
                /**
@@ -39,44 +54,23 @@ class VehiculeController extends Controller
      */
     public function createVehiculeAction(Request $request)
     {
-        $entity = new Vehicule();
+        $em = $this->getDoctrine()->getManager();
+        $entity = new Vehicule($em->getRepository('AppBundle:Info')->findOneByUid($request->headers->get('X-Auth-Token')));
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $form->submit($request->request->all(),false); // Validation des d
-        $user = $this->getConnectedUser();
-         if (! $user) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-        if ($form->isValid()) {
-            $entity->setUser($user);
-            $em = $this->getDoctrine()->getManager();
+        if ($form->isValid()) {  
             $em->persist($entity);
             $em->flush();
-          $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
-          $couts=$this->couts($entity->getId());
-          $entity->setLastReleve($releve);
-          $entity->setCouts($couts);
+            $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
+
+            $entity->setLastReleve($releve);
            return $entity;
         }
         return  $form;
     }
 
-    
-    public function couts($entity, $annee=0)
-    {    $em = $this->getDoctrine()->getManager();
-        $coutReparations = $em->getRepository('AppBundle:Reparation')->findCoutTotal($entity, $annee);
-        $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($entity, $annee);
-        $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($entity, $annee);
-        $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($entity, $annee);
-        return  array(
-            'coutReparations'=>$coutReparations,
-            'coutPolices'=>$coutPolices,
-            'coutVisites'=>$coutVisites,
-            'coutMaintenances'=>$coutMaintenances,
-            'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
-            );
 
-    }
 
      /**
      * Edits an existing Produit entity.
@@ -86,12 +80,8 @@ class VehiculeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AppBundle:Vehicule')->find($request->get('id'));
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Vehicule entity.');
-        }
         $form = $this->createCreateForm($entity);
         $form->submit($request->request->all(), false); // Validation des données
-
         if ($form->isValid()) {
             $em->flush();
           $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);

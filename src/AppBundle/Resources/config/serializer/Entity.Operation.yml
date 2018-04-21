@@ -10,7 +10,9 @@ AppBundle\Entity\Operation:
         km_previsionnel_default:
             groups: ['full']               
         libele:
-            groups: ['full']      
+            groups: ['full'] 
+        todo:
+            groups: ['full']                  
         reference:
             groups: ['full']
         description:

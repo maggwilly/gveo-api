@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 use AppBundle\Form\ReparationType;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\Accessor;
 /**
  * Reparation
  *
@@ -55,7 +55,9 @@ class Reparation implements InfoInterface
      */
     private $vehicule;
 
-
+   /** @Accessor(getter="isExpired") 
+   */
+     private $expired;
     /**
      * @ORM\ManyToOne(targetEntity="Operation")
      * @var Vehicule
@@ -218,4 +220,19 @@ class Reparation implements InfoInterface
     {
         return ReparationType::class;
     }
+
+
+    /**
+     * Get esExpired
+     * @return boolean 
+     */
+    public function isExpired()
+    {  
+        if(is_null($this->vehicule->getLastReleve()))
+            return true;
+           $tokm=$this->vehicule->getLastReleve()->getKm()-$this->km;
+           $this->expired=($tokm>$this->duree)||($tokm<$this->operation->getKmAlerte());
+       return $this->expired;
+    }
+  
 }

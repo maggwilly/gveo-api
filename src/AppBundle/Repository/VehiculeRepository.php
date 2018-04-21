@@ -15,7 +15,7 @@ class VehiculeRepository extends EntityRepository
  public function findByUser($user)
 {
   $qb = $this->createQueryBuilder('p')
-->where('p.user=:user')->setParameter('user', $user);   
+->where('p.info=:user')->setParameter('user', $user);   
    return $qb ->getQuery()->getResult();
   ;
 }

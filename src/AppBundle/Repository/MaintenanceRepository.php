@@ -25,18 +25,19 @@ class MaintenanceRepository extends EntityRepository
 
 }
 
- public function findCoutTotal($vehicule,$annee=false)
+ public function findCoutTotal($uid,$vehicule,\Datetime $startDate,\Datetime $endDate)
 {
 
 
- $qb = $this->createQueryBuilder('v')
- ->andWhere('v.vehicule = :vehicule')
+ $qb = $this->createQueryBuilder('v')->join('v.vehicule','vh')->where('vh.info = :uid') ->setParameter('uid', $uid);
+ if ($vehicule!=0) {
+    $qb->andWhere('v.vehicule = :vehicule')
  ->setParameter('vehicule', $vehicule);
- if ($annee) {
-  $qb->andWhere('v.dateSave BETWEEN :debut AND :fin')
-  ->setParameter('debut', new \Datetime(date('Y').'-01-01')) //
-   ->setParameter('fin', new \Datetime(date('Y').'-12-31')); //
  }
+
+  $qb->andWhere('v.dateSave BETWEEN :debut AND :fin')
+  ->setParameter('debut', $startDate) 
+   ->setParameter('fin', $endDate); 
  $qb->select('SUM(v.cout+v.coutMainOeuvre) as coutTotal');
        
  return $qb->getQuery()->getSingleScalarResult();
