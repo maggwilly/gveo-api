@@ -4,7 +4,9 @@ AppBundle\Entity\Releve:
         id:
             groups: ['full']
         dateSave:
-            groups: ['full']      
+            groups: ['full']  
+            expose: true
+            type: DateTime<'Y-m-d'>                  
         km:
             groups: ['full']       
         expired:
