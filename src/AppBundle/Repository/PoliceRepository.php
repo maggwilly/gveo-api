@@ -17,7 +17,7 @@ class PoliceRepository extends EntityRepository
   $qb = $this->createQueryBuilder('r')
   ->where('r.vehicule=:vehicule')
   ->setParameter('vehicule', $vehicule)
-  ->orderBy('r.startDate', 'DESC')
+  ->orderBy('r.endDate', 'DESC')
   ->setMaxResults(1); 
  return $qb->getQuery()->getOneOrNullResult();
 
