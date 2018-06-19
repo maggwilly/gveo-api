@@ -291,7 +291,7 @@ class Abonnement
      *
      * @return Abonnement
      */
-    public function setInfo(\Pwm\AdminBundle\Entity\Info $info = null)
+    public function setInfo(\AppBundle\Entity\Info $info = null)
     {
         $this->info = $info;
 
