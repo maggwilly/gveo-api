@@ -223,7 +223,7 @@ class InfoController extends Controller
         public function showAbonnementAction(Info $info){
         $em = $this->getDoctrine()->getManager();
         $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);
-         if (is_null($abonnement)) {*/
+         if (is_null($abonnement)) {
             $abonnement=new Abonnement('starter');
             $abonnement->setInfo($info);
             $em->persist($abonnement);
