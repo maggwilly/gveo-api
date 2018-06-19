@@ -97,33 +97,6 @@ class InfoController extends Controller
         return  $info->getAmbassador();
     }
 
-     /**
-     * Lists all Produit entities.
-     *@Rest\View()
-     */
-    public function registerAction(Request $request,  $registrationId)
-    {     $em = $this->getDoctrine()->getManager();
-          $registrqtion = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($registrationId);
-           if(!is_null($registrqtion)){
-               $registrqtion->setLatLoginDate(new \DateTime())->setIsFake(null)->setUserAgent($request->headers->get('User-Agent'));
-               $form = $this->createForm('AppBundle\Form\RegistrationType', $registrqtion);
-               $form->submit($request->request->all(),false);
-              if ($form->isValid()) {
-                 $em->flush();
-                  }
-            return array('success'=>true);
-           }
-            $registrqtion = new Registration($registrationId);
-            $registrqtion ->setUserAgent($request->headers->get('User-Agent'));
-            $form = $this->createForm('AppBundle\Form\RegistrationType', $registrqtion);
-            $form->submit($request->request->all(),false);
-          if ($form->isValid()) {
-              $em->persist($registrqtion);
-              $em->flush();
-            return array('success'=>true);
-        }
-        return $form;
-    }
 
 
     /**
@@ -146,14 +119,6 @@ class InfoController extends Controller
                 $em->persist($info); 
                  $em->flush(); 
               }
-            if($registration!=null){
-                $registration->setInfo($info);
-                  $em->flush();
-                 $url="https://trainings-fa73e.firebaseio.com/users/".$info->getUid()."/registrationsId/.json";
-                 $data = array($registration->getRegistrationId() => true);
-                  $fmc_response= $this->get('fmc_manager')->sendOrGetData($url,$data,'PATCH');           
-              } 
-         
         return $info->getEmail()!=null?$info:$res;
     }
 
@@ -205,5 +170,53 @@ class InfoController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+         /**
+     * Lists all Produit entities.
+     *@Rest\View()
+     */
+    public function createRegistrationAction(Request $request, Registration $registration=null)
+    {  
+          $em = $this->getDoctrine()->getManager();
+           if(!is_null($registration))
+              return $this->editRegistrationJsonAction($request,$registration);
+            $registration = new Registration();
+            $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
+            $form->submit($request->request->all(),false);
+          if ($form->isValid()) {
+              $registration ->setUserAgent($request->headers->get('User-Agent'));
+              $em->persist($registration);
+              $em->flush();
+            return array('success'=>true);
+          }
+        return $form;
+    }
+
+
+     /**
+     * Lists all Produit entities.
+     *@Rest\View()
+     */
+    public function editRegistrationJsonAction(Request $request,Registration $registration)
+    {
+               $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
+               $form->submit($request->request->all(),false);
+              if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $registration
+               ->setLatLoginDate(new \DateTime())
+               ->setIsFake(null)
+               ->setUserAgent($request->headers->get('User-Agent'));                
+                 $em->flush();
+                return array('success'=>true);
+                  }
+            return $form;
+    }
+
+        public function showAbonnementAction(Info $info){
+        $em = $this->getDoctrine()->getManager();
+         $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);
+        return $abonnement;
     }
 }

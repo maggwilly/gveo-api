@@ -12,6 +12,7 @@ use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\Version;
+use AppBundle\Entity\Registration;
 /**
  * User controller.
  *
@@ -94,7 +95,7 @@ class UserController extends Controller
      * Finds and displays a User entity.
      *@Rest\View(serializerGroups={"user"})
      */
-    public function showAction()
+    public function showUserAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -138,7 +139,7 @@ class UserController extends Controller
      * Edits an existing User entity.
      *@Rest\View(serializerGroups={"user"})
      */
-    public function updateAction(Request $request)
+    public function updateUserAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
           $entity = $this->getConnectedUser();

@@ -53,7 +53,7 @@ class Maintenance implements InfoInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaires", type="text", length=255)
+     * @ORM\Column(name="commentaires", type="text", length=255, nullable=true)
      */
     private $commentaires;
 
