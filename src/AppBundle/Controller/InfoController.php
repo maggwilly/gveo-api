@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les annotations
 use FOS\RestBundle\View\View; 
+use AppBundle\Entity\Abonnement;
 /**
  * Info controller.
  *
@@ -217,6 +218,11 @@ class InfoController extends Controller
         public function showAbonnementAction(Info $info){
         $em = $this->getDoctrine()->getManager();
          $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);
+         if (is_null($abonnement)) {
+            $abonnement=new Abonnement('starter');
+            $em->persist($abonnement);
+              $em->flush();
+         }
         return $abonnement;
     }
 }

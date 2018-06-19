@@ -80,10 +80,11 @@ class Abonnement
          /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($plan=null)
     {
         $this->date=new \DateTime();
          $this->startDate=new \DateTime();
+         $this->plan=$plan;
     }
     /**
      * Get id
@@ -163,20 +164,20 @@ class Abonnement
     */
     public function PrePersist(){
           $this->endDate=new \DateTime();
-          if(!is_null($this->session))
            switch ($this->plan) {
                case 'starter':
-                 $this->endDate->modify('+'.$this->session->getPrice()->getStarterDelay().' day');
+                 $this->endDate->modify('+30 day');
+                 $this->$nbervehicule=1;
                    break;
                case 'standard':
-                     $this->endDate->modify('+'.$this->session->getPrice()->getStandardDelay().' day');
+                     $this->$nbervehicule=10;
+                     $this->endDate->modify('+60 day');
                    break;               
                default:
-                   $this->endDate->modify('+'.$this->session->getPrice()->getPremiumDelay().' day');
+                    $this->$nbervehicule=150;
+                   $this->endDate->modify('+1 year');
                    break;
            }
-           else
-             $this->endDate->modify('+1 year');
     }
     /**
      * Get nbervehicule
