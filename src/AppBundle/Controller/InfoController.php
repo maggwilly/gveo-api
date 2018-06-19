@@ -222,6 +222,7 @@ class InfoController extends Controller
             $abonnement=new Abonnement('starter');
             $em->persist($abonnement);
               $em->flush();
+              return $abonnement;
          }
         return $abonnement;
     }
