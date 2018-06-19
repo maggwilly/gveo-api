@@ -220,6 +220,7 @@ class InfoController extends Controller
          $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);
          if (is_null($abonnement)) {
             $abonnement=new Abonnement('starter');
+            $abonnement->setInfo($info);
             $em->persist($abonnement);
               $em->flush();
               return $abonnement;
