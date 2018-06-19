@@ -215,6 +215,11 @@ class InfoController extends Controller
             return $form;
     }
 
+
+    /**
+     * Lists all Produit entities.
+     *@Rest\View(serializerGroups={"full"})
+     */
         public function showAbonnementAction(Info $info){
         $em = $this->getDoctrine()->getManager();
          $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);

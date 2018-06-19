@@ -1,0 +1,11 @@
+AppBundle\Entity\Abonnement:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full']
+        startDate:
+            groups: ['full']  
+            expose: true
+            type: DateTime<'Y-m-d'>                  
+        nbervehicule:
+            groups: ['full']       
