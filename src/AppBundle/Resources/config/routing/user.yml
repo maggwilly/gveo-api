@@ -24,7 +24,3 @@ user_change_password:
     path:     /change/password
     defaults: { _controller: "AppBundle:User:chagePassword" }
 
-user_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "AppBundle:User:delete" }
-    methods:  [POST, DELETE,GET]
