@@ -228,8 +228,8 @@ class InfoController extends Controller
             $abonnement->setInfo($info);
             $em->persist($abonnement);
             $em->flush();
-              return $info;
+              return  "$info";
          }
-        return  $info;
+        return  "$info";
     }
 }
