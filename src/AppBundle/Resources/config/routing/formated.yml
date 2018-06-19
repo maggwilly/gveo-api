@@ -129,16 +129,16 @@ vehicule_delete:
 
 info_show_json:
     path:     /info/{uid}/show
-    defaults: { _controller: "AppBundle:info:showJson" }
+    defaults: { _controller: "AppBundle:Info:showJson" }
 
 abonnement_show_json:
     path:     /abonnement/{uid}/show
-    defaults: { _controller: "AppBundle:info:showAbonnement" }
+    defaults: { _controller: "AppBundle:Info:showAbonnement" }
 
 info_update_json:
     path:     /info/{uid}/update
-    defaults: { _controller: "AppBundle:info:editJson" }
+    defaults: { _controller: "AppBundle:Info:editJson" }
 
 registration_new:
     path:     /registation/create
-    defaults: { _controller: "AppBundle:info:createRegistration" }
+    defaults: { _controller: "AppBundle:iInfo:createRegistration" }
