@@ -230,6 +230,6 @@ class InfoController extends Controller
               $em->flush();
               return $abonnement;
          }
-        return $abonnement;
+        return  $info;
     }
 }
