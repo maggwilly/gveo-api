@@ -9,3 +9,5 @@ AppBundle\Entity\Abonnement:
             type: DateTime<'Y-m-d'>                  
         nbervehicule:
             groups: ['full']       
+        status:
+            groups: ['full']   

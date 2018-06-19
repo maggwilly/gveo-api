@@ -85,6 +85,8 @@ class Abonnement
         $this->date=new \DateTime();
          $this->startDate=new \DateTime();
          $this->plan=$plan;
+         $this->price=0;
+          $this->status='ACTIVE';
     }
     /**
      * Get id
@@ -167,14 +169,14 @@ class Abonnement
            switch ($this->plan) {
                case 'starter':
                  $this->endDate->modify('+30 day');
-                 $this->$nbervehicule=1;
+                 $this->nbervehicule=1;
                    break;
                case 'standard':
-                     $this->$nbervehicule=10;
+                     $this->nbervehicule=10;
                      $this->endDate->modify('+60 day');
                    break;               
                default:
-                    $this->$nbervehicule=150;
+                    $this->nbervehicule=150;
                    $this->endDate->modify('+1 year');
                    break;
            }

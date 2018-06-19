@@ -52,7 +52,7 @@ class InfoController extends Controller
            $em->persist($info);
             $em->flush();
           }
-        $form = $this->createForm('Pwm\AdminBundle\Form\InfoType', $info);
+        $form = $this->createForm('AppBundle\Form\InfoType', $info);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -63,8 +63,7 @@ class InfoController extends Controller
           $info->setPhotoURL($results['url']);
           $em->flush();
           $info->remove();
-       }'
-       '
+       }
           return $this->showJsonAction($info);
         }
         return $form;
@@ -108,7 +107,7 @@ class InfoController extends Controller
          $em = $this->getDoctrine()->getManager();
          $url= "https://trainings-fa73e.firebaseio.com/users/".$uid.".json";
          $res = $this->get('fmc_manager')->sendOrGetData($url,null,'GET');        
-         $info = $em->getRepository('AdminBundle:Info')->findOneByUid($uid);
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
          $registrationId=$request->query->get('registrationId');
          $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($registrationId);
            if(is_null($info)){
@@ -222,14 +221,14 @@ class InfoController extends Controller
      */
         public function showAbonnementAction(Info $info){
         $em = $this->getDoctrine()->getManager();
-        $abonnement = $em->getRepository('AdminBundle:Abonnement')->findMeOnThis($info);
+        $abonnement = $em->getRepository('AppBundle:Abonnement')->findMeOnThis($info);
          if (is_null($abonnement)) {
             $abonnement=new Abonnement('starter');
             $abonnement->setInfo($info);
             $em->persist($abonnement);
             $em->flush();
-              return  "$info";
+              return  $abonnement;
          }
-        return  "$info";
+        return  $abonnement;
     }
 }
