@@ -19,5 +19,5 @@ operation_create:
     methods:  [GET, POST]
 
 registration_new:
-    path:     /registation/create
+    path:     /registration/create
     defaults: { _controller: "AppBundle:iInfo:createRegistration" }
