@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les annotations
 use FOS\RestBundle\View\View; 
 use AppBundle\Entity\Abonnement;
+use AppBundle\Entity\Registration;
 /**
  * Info controller.
  *
