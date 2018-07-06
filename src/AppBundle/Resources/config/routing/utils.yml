@@ -18,3 +18,6 @@ operation_create:
     defaults: { _controller: "AppBundle:Utils:createOperation" }
     methods:  [GET, POST]
 
+registration_new:
+    path:     /registation/create
+    defaults: { _controller: "AppBundle:iInfo:createRegistration" }

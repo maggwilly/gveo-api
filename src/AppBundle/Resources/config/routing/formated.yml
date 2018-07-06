@@ -138,7 +138,3 @@ abonnement_show_json:
 info_update_json:
     path:     /info/{uid}/update
     defaults: { _controller: "AppBundle:Info:editJson" }
-
-registration_new:
-    path:     /registation/create
-    defaults: { _controller: "AppBundle:iInfo:createRegistration" }
