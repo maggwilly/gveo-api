@@ -20,4 +20,4 @@ operation_create:
 
 registration_new:
     path:     /registration/create
-    defaults: { _controller: "AppBundle:iInfo:createRegistration" }
+    defaults: { _controller: "AppBundle:Info:createRegistration" }
