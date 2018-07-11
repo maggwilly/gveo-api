@@ -22,8 +22,8 @@ registration_new:
     path:     /registration/create
     defaults: { _controller: "AppBundle:Info:createRegistration" }
     methods:  [GET, POST] 
-       
+
 registration_update:
-    path:     /registration/update
+    path:     /registration/{id}/update
     defaults: { _controller: "AppBundle:Info:editRegistrationJson" }
     methods:  [GET, POST]

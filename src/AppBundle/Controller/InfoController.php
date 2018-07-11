@@ -75,10 +75,10 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function editJsonAction(Request $request)
+    public function editJsonAction(Request $request,$uid)
     {
          $em = $this->getDoctrine()->getManager();
-         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('id'));
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('uid'));
          $form = $this->createForm('AppBundle\Form\InfoType', $info);
          $form->submit($request->request->all(),false);
         if ($form->isValid()) {
@@ -198,7 +198,7 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View()
      */
-    public function editRegistrationJsonAction(Request $request)
+    public function editRegistrationJsonAction(Request $request,$id)
     {
             $em = $this->getDoctrine()->getManager();
              $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
