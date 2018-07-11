@@ -198,7 +198,7 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View()
      */
-    public function editRegistrationJsonAction(Request $request,$id)
+    public function editRegistrationJsonAction(Request $request)
     {
             $em = $this->getDoctrine()->getManager();
              $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
