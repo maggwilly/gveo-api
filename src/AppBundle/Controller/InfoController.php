@@ -78,11 +78,10 @@ class InfoController extends Controller
     public function editJsonAction(Request $request)
     {
          $em = $this->getDoctrine()->getManager();
-         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('uid'));
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('id'));
          $form = $this->createForm('AppBundle\Form\InfoType', $info);
          $form->submit($request->request->all(),false);
         if ($form->isValid()) {
-           
             $em->flush();
             return $info;
         }
@@ -202,7 +201,7 @@ class InfoController extends Controller
     public function editRegistrationJsonAction(Request $request)
     {
             $em = $this->getDoctrine()->getManager();
-             $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('registrationId'));
+             $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
              if(is_null($registration))
               return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
