@@ -18,3 +18,13 @@ auth-tokens:
 auth-tokens_delete:
     path:      /token/delete
     defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }
+
+registration_update:
+    path:     /v1/formated/registration/{registrationId}/update
+    defaults: { _controller: "AppBundle:Info:editRegistrationJson" }
+    methods:  [GET, POST]
+
+info_update_json:
+    path:     /v1/formated/info/{uid}/update
+    defaults: { _controller: "AppBundle:Info:editJson" }
+    methods:  [GET, POST]

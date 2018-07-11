@@ -15,11 +15,6 @@ user_create:
     defaults: { _controller: "AppBundle:User:create" }
 
 
-user_update:
-    path:     /update
-    defaults: { _controller: "AppBundle:User:update" }
-
-
 user_change_password:
     path:     /change/password
     defaults: { _controller: "AppBundle:User:chagePassword" }
