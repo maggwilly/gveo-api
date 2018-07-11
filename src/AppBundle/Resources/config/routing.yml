@@ -18,5 +18,3 @@ auth-tokens:
 auth-tokens_delete:
     path:      /token/delete
     defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }
-
-

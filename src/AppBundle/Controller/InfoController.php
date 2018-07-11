@@ -75,10 +75,10 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function editJsonAction(Request $request,$uid)
+    public function editJsonAction(Request $request,$id)
     {
          $em = $this->getDoctrine()->getManager();
-         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('uid'));
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('id'));
          $form = $this->createForm('AppBundle\Form\InfoType', $info);
          $form->submit($request->request->all(),false);
         if ($form->isValid()) {
@@ -198,11 +198,11 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View()
      */
-    public function editRegistrationJsonAction(Request $request)
+    public function editRegistrationJsonAction(Request $request,$id)
     {
             $em = $this->getDoctrine()->getManager();
-            // $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId();
-           /*  if(is_null($registration))
+           $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
+            if(is_null($registration))
               return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
                $form->submit($request->request->all(),false);
@@ -212,8 +212,8 @@ class InfoController extends Controller
                ->setUserAgent($request->headers->get('User-Agent'));                
                  $em->flush();
                 return array('success'=>true);
-                  }*/
-            return $request->query->get('id');//$form;
+                  }
+            return $form;
     }
 
 
