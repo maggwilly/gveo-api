@@ -41,7 +41,7 @@ class InfoController extends Controller
         ));
     }
 
-        /**
+    /**
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
@@ -50,8 +50,8 @@ class InfoController extends Controller
         $info = $em->getRepository('AdminBundle:Info')->findOneByUid($email);
           if($info==null){
           $info = new Info($email);
-           $em->persist($info);
-            $em->flush();
+          $em->persist($info);
+          $em->flush();
           }
         $form = $this->createForm('AppBundle\Form\InfoType', $info);
         $form->handleRequest($request);
@@ -71,23 +71,24 @@ class InfoController extends Controller
     }
 
 
-
-
     /**
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function editJsonAction(Request $request, Info $info)
+    public function editJsonAction(Request $request)
     {
-        $form = $this->createForm('AppBundle\Form\InfoType', $info);
+         $em = $this->getDoctrine()->getManager();
+         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('uid'));
+         $form = $this->createForm('AppBundle\Form\InfoType', $info);
          $form->submit($request->request->all(),false);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+           
             $em->flush();
             return $info;
         }
         return $form;
     }
+
 
     /**
      * Lists all Produit entities.
@@ -198,16 +199,16 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View()
      */
-    public function editRegistrationJsonAction(Request $request,Registration $registration)
+    public function editRegistrationJsonAction(Request $request)
     {
+            $em = $this->getDoctrine()->getManager();
+             $registration = $em->getRepository('AppBundle:Registration')->findOneById($request->query->get('registrationId'));
              if(is_null($registration))
               return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
                $form->submit($request->request->all(),false);
               if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $registration
-               ->setLatLoginDate(new \DateTime())
+                $registration->setLatLoginDate(new \DateTime())
                ->setIsFake(null)
                ->setUserAgent($request->headers->get('User-Agent'));                
                  $em->flush();
