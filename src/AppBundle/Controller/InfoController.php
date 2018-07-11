@@ -202,7 +202,7 @@ class InfoController extends Controller
     {
             $em = $this->getDoctrine()->getManager();
              $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
-             if(is_null($registration))
+           /*  if(is_null($registration))
               return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
                $form->submit($request->request->all(),false);
@@ -212,8 +212,8 @@ class InfoController extends Controller
                ->setUserAgent($request->headers->get('User-Agent'));                
                  $em->flush();
                 return array('success'=>true);
-                  }
-            return $form;
+                  }*/
+            return $registration;//$form;
     }
 
 
