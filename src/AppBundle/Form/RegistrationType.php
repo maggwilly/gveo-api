@@ -15,6 +15,7 @@ class RegistrationType extends AbstractType
     {
         $builder->
         add('registrationId')
+        ->add('info','entity',array('class' => 'AppBundle:Info'))
         ->add('appVersion');
     }
     

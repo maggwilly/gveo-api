@@ -21,3 +21,7 @@ operation_create:
 registration_new:
     path:     /registration/create
     defaults: { _controller: "AppBundle:Info:createRegistration" }
+
+registration_update:
+    path:     /registration/{registrationId}/update
+    defaults: { _controller: "AppBundle:Info:editRegistrationJson" }

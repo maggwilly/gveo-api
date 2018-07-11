@@ -173,15 +173,14 @@ class InfoController extends Controller
         ;
     }
 
-         /**
-     * Lists all Produit entities.
+    /**
+     *Lists all Produit entities.
      *@Rest\View()
      */
-    public function createRegistrationAction(Request $request, Registration $registration=null)
+    public function createRegistrationAction(Request $request)
     {  
           $em = $this->getDoctrine()->getManager();
-           if(!is_null($registration))
-              return $this->editRegistrationJsonAction($request,$registration);
+
             $registration = new Registration();
             $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
             $form->submit($request->request->all(),false);
@@ -201,6 +200,8 @@ class InfoController extends Controller
      */
     public function editRegistrationJsonAction(Request $request,Registration $registration)
     {
+             if(is_null($registration))
+              return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
                $form->submit($request->request->all(),false);
               if ($form->isValid()) {
