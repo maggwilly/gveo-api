@@ -201,7 +201,7 @@ class InfoController extends Controller
     public function editRegistrationJsonAction(Request $request)
     {
             $em = $this->getDoctrine()->getManager();
-             $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));
+            // $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId();
            /*  if(is_null($registration))
               return $this->createRegistrationAction($request);
                $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
@@ -213,7 +213,7 @@ class InfoController extends Controller
                  $em->flush();
                 return array('success'=>true);
                   }*/
-            return $registration;//$form;
+            return $request->query->get('id');//$form;
     }
 
 
