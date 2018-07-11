@@ -75,7 +75,7 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function editJsonAction(Request $request,$id)
+    public function editJsonAction(Request $request,$id=null)
     {
          $em = $this->getDoctrine()->getManager();
          $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('id'));
@@ -104,7 +104,7 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function showJsonAction(Request $request,$uid){
+    public function showJsonAction(Request $request,$uid=null){
          $em = $this->getDoctrine()->getManager();
          $url= "https://trainings-fa73e.firebaseio.com/users/".$uid.".json";
          $res = $this->get('fmc_manager')->sendOrGetData($url,null,'GET');        
@@ -198,7 +198,7 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View()
      */
-    public function editRegistrationJsonAction(Request $request,$id)
+    public function editRegistrationJsonAction(Request $request,$id=null)
     {
             $em = $this->getDoctrine()->getManager();
            $registration = $em->getRepository('AppBundle:Registration')->findOneByRegistrationId($request->query->get('id'));

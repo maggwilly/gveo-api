@@ -136,7 +136,7 @@ abonnement_show_json:
     defaults: { _controller: "AppBundle:Info:showAbonnement" }
 
 info_update_json:
-    path:     /info/update?id={id}
+    path:     /info/update
     defaults: { _controller: "AppBundle:Info:editJson" }
     methods:  [GET, POST]
 
