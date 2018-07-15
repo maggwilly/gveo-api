@@ -316,7 +316,7 @@ class ReparationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-         return ['success'=>true, 'releve'=> $entity];
+         return $entity;
         }
         return  $form;
     }
