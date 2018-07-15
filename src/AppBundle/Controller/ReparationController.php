@@ -201,10 +201,13 @@ class ReparationController extends Controller
         $coutPolices = $em->getRepository('AppBundle:Police')->findCoutTotal($uid,$entity, $startDate,$endDate);
         $coutVisites = $em->getRepository('AppBundle:Visite')->findCoutTotal($uid,$entity, $startDate,$endDate);
         $coutMaintenances = $em->getRepository('AppBundle:Maintenance')->findCoutTotal($uid,$entity, $startDate,$endDate);
+        $last = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity->getId());
+        $first = $em->getRepository('AppBundle:Releve')->findFirstByVehicule($entity->getId());
         return  array(
             'preventive'=>($coutReparations+0),
             'legislation'=>($coutVisites+$coutPolices),
             'cuirative'=>($coutMaintenances+0),
+            'totalkm'=>($last->getKm()-$first->getKm()),
             'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
             );
     }

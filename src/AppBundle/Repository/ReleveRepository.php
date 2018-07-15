@@ -20,5 +20,15 @@ public function findLastByVehicule($vehicule)
   ->orderBy('r.dateSave', 'DESC')
   ->setMaxResults(1); 
  return $qb->getQuery()->getOneOrNullResult();
-}   
+}  
+
+public function findFirstByVehicule($vehicule)
+{
+  $qb = $this->createQueryBuilder('r')
+  ->where('r.vehicule=:vehicule')
+  ->setParameter('vehicule', $vehicule)
+  ->orderBy('r.dateSave', 'ASC')
+  ->setMaxResults(1); 
+ return $qb->getQuery()->getOneOrNullResult();
+} 
 }
