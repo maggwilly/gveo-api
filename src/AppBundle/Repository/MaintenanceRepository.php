@@ -27,9 +27,8 @@ class MaintenanceRepository extends EntityRepository
 
  public function findCoutTotal($uid,$vehicule,\Datetime $startDate,\Datetime $endDate)
 {
-
-
- $qb = $this->createQueryBuilder('v')->join('v.vehicule','vh')->where('vh.info = :uid') ->setParameter('uid', $uid);
+ $qb = $this->createQueryBuilder('v')->join('v.vehicule','vh')
+ ->where('vh.info = :uid') ->setParameter('uid', $uid);
  if ($vehicule!=0) {
     $qb->andWhere('v.vehicule = :vehicule')
  ->setParameter('vehicule', $vehicule);

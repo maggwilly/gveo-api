@@ -379,7 +379,6 @@ class ReparationController extends Controller
         }
         $form = $this->createCreateForm($entity);
         $form->submit($request->request->all(), false); // Validation des données
-
         if ($form->isValid()) {
             $em->flush();
            return $entity;
@@ -401,12 +400,10 @@ class ReparationController extends Controller
         }
         $form = $this->createCreateForm($entity);
         $form->submit($request->request->all(), false); // Validation des données
-
         if ($form->isValid()) {
             $em->flush();
            return $entity;
         }
-
         return  $form;
     }
 
@@ -422,7 +419,7 @@ class ReparationController extends Controller
         return $form;
     }
 
-      /**
+     /**
      * Edits an existing Produit entity.
      *@Rest\View()
      */
@@ -436,6 +433,7 @@ class ReparationController extends Controller
         }
        return ['success'=>true];
     }
+    
       /**
      * Edits an existing Produit entity.
      *@Rest\View()

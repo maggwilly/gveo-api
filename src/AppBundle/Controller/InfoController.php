@@ -184,8 +184,9 @@ class InfoController extends Controller
             $registration = new Registration();
             $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
             $form->submit($request->request->all(),false);
-          if ($form->isValid()) {
-              $registration ->setUserAgent($request->headers->get('User-Agent'));
+    if ($form->isValid()) {
+        $registration ->setUserAgent($request->headers->get('User-Agent'));
+        if(is_null($em->getRepository('AppBundle:Registration')->findOneByRegistrationId($registration->getRegistrationId())))
               $em->persist($registration);
               $em->flush();
             return array('success'=>true);
