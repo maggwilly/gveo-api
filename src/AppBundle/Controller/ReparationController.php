@@ -207,7 +207,7 @@ class ReparationController extends Controller
             'preventive'=>($coutReparations+0),
             'legislation'=>($coutVisites+$coutPolices),
             'cuirative'=>($coutMaintenances+0),
-            'totalkm'=>($last->getKm()-$first->getKm()),
+           // 'totalkm'=>($last->getKm()-$first->getKm()),
             'coutTotal'=>($coutMaintenances+$coutVisites+$coutPolices+  $coutReparations)
             );
     }
