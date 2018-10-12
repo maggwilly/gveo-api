@@ -49,8 +49,16 @@
             "@symfony-scripts"
         ]
     },
+    "options": {
+        "ssl": {
+            "verify_peer": false
+          }
+		},
+    			
     "config": {
         "bin-dir": "bin",
+		"disable-tls": true,
+        "secure-http": false,
         "platform": {
             "php": "5.6.25"
         }
