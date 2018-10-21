@@ -24,6 +24,13 @@ class User extends BaseUser
     protected $id;
 	
 
+    /**
+     * @var string
+     * @ORM\Column(name="nom", type="string", length=255,nullable=true)
+     */
+    private $nom;
+
+
  
      /**
      * @var string
@@ -199,6 +206,18 @@ class User extends BaseUser
         return $this;
     }
    
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+
+
 
 
     public function __toString()
@@ -290,6 +309,10 @@ class User extends BaseUser
     {
         return $this->credentialsExpireAt;
     }
+
+
+
+     
 
 
 
