@@ -44,12 +44,7 @@ class User extends BaseUser
     private $type;
 
 
-   /**
-     * @var string
-     * @ORM\Column(name="phone", type="string", length=255,nullable=true)
-     */
-    private $phone;
-
+ 
      /**
      * @var string
      *
@@ -243,16 +238,7 @@ class User extends BaseUser
         return $this->getUsername();
     }
 
-      /**
-     * Get parties
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getParties()
-    {
-        return $this->parties;
-    }
-
+   
     /**
      * Get enabled
      *
@@ -386,29 +372,5 @@ class User extends BaseUser
         return $this->type;
     }
 
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
 
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    
 }
