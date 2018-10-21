@@ -1,0 +1,57 @@
+{% extends "AppBundle::table.html.twig" %}
+{% block page_title %}Les utilisateurs{% endblock %}
+{% block body %}
+      <div class="row-fluid sortable">    
+        <div class="box span12">
+          <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon white user"></i><span class="break"></span>Les utilisateurs</h2>
+            <div class="box-icon">
+              <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+              <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+              <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+            <table class="table  datatable" id="my-table">
+          <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Type d'Abonnement</th>
+                 <th>Du </th>
+                 <th>Au</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for abonnement in abonnements %}
+            <tr>
+                <td>{% if abonnement.info.displayName %}{% else %} {{ abonnement.info.email }}{% endif %}
+                <p><b> Inscrit le :</b>  {{abonnement.date|date('d/m/Y à H:i') }}</p>
+                </td>
+                <td>
+                {{ abonnement.plan | upper }}
+                <p><b> Nombre de vehicule:</b> {{abonnement.info.vehicules|length}}</p>
+                <p><b> Souscrit le :</b>  {{abonnement.date|date('d/m/Y à H:i') }}</p>
+                </td>
+                <td>{% if abonnement.startDate %}{{ abonnement.startDate|date('d/m/Y à H:i') }}{% endif %}</td>
+                 <td>{% if abonnement.endDate %}{{ abonnement.endDate|date('Y-m-d à H:i') }}{% endif %}</td>
+                <td>{{ abonnement.status }}</td>
+                <td>
+                     <ul>
+                        <li>
+                            <a href="{{ path('abonnement_edit', { 'id': abonnement.id }) }}">Renouveller</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('abonnement_toggle', { 'id': abonnement.id }) }}">Suspendre</a>
+                        </li>
+                    </ul>          
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+{% endblock %}

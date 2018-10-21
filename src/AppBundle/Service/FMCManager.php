@@ -1,20 +1,15 @@
 <?php
 namespace AppBundle\Service;
-
 class FMCManager
 {
-
 const HEADERS=array(
     "Authorization: key=AAAAJiQu4xo:APA91bH63R7-CeJ7jEgGtb2TNVkCx0TDWAYbu32mO1_4baLtrrFidNrbNy98Qngb6G67efbuJ8BpInpJiCeoTp-p5mt2706P2hXbXqrTXOWlaJFTDHza2QVWSlwsbF27eBhD2PZVJKuu",
       "content-type: application/json"
    );
 const FCM_URL = "https://fcm.googleapis.com/fcm/send";
-
 public function __construct()
 {
-
 }
-
   public function sendMessage($data, $json_decode=true)
     {
         $content = json_encode($data);
@@ -36,8 +31,6 @@ public function __construct()
         $response = json_decode($json_response, true);
         return $json_decode?$response:$json_response;
     }
-
-
     public function sendOrGetData($url,$data,$costum_method,$json_decode=true,$headers=array())
     {    $content ='';
         if(!is_null($data))
@@ -62,5 +55,4 @@ public function __construct()
         return $json_decode?$response:$json_response;
     }
   
-
 }

@@ -86,7 +86,16 @@ class Info
 
     private $file;
 
+   /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vehicule", mappedBy="info", cascade={"persist","remove"})
+   * @ORM\OrderBy({"id" = "ASC"})
+   */
+  private $vehicules;   
 
+        /**
+   * @ORM\OneToOne(targetEntity="AppBundle\Entity\Abonnement" ,mappedBy="info")
+   */
+  private $abonnement;
     /**
      * Constructor
      */
@@ -380,4 +389,62 @@ class Info
         return $this->registrations;
     }
 
+
+    /**
+     * Add vehicule
+     *
+     * @param \AppBundle\Entity\Vehicule $vehicule
+     *
+     * @return Info
+     */
+    public function addVehicule(\AppBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules[] = $vehicule;
+
+        return $this;
+    }
+
+    /**
+     * Remove vehicule
+     *
+     * @param \AppBundle\Entity\Vehicule $vehicule
+     */
+    public function removeVehicule(\AppBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules->removeElement($vehicule);
+    }
+
+    /**
+     * Get vehicules
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVehicules()
+    {
+        return $this->vehicules;
+    }
+
+    /**
+     * Set abonnement
+     *
+     * @param \AppBundle\Entity\Abonnement $abonnement
+     *
+     * @return Info
+     */
+    public function setAbonnement(\AppBundle\Entity\Abonnement $abonnement = null)
+    {
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get abonnement
+     *
+     * @return \AppBundle\Entity\Abonnement
+     */
+    public function getAbonnement()
+    {
+        return $this->abonnement;
+    }
 }

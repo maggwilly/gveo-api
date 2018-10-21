@@ -10,11 +10,10 @@ app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"  
     prefix: /v1/formated/user
     
-auth-tokens:
-    path:      /login
-    defaults: { _controller: "AppBundle:AuthToken:postAuthTokens" }
-    methods:  [POST,OPTIONS,GET]
-
-auth-tokens_delete:
-    path:      /token/delete
-    defaults: { _controller: "AppBundle:AuthToken:removeAuthTokens" }
+app_abonnement:
+    resource: "@AppBundle/Resources/config/routing/abonnement.yml"  
+    prefix: /abonnement 
+    
+app_info:
+    resource: "@AppBundle/Resources/config/routing/info.yml"  
+    prefix: /info    

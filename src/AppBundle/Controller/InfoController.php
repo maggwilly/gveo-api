@@ -25,7 +25,7 @@ class InfoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $infos = $em->getRepository('AppBundle:Info')->findAll();
-        foreach ($infos as $key => $info) {
+       /* foreach ($infos as $key => $info) {
             foreach ($info->getRegistrations() as $key => $registration) {
                  if(!$registration->getIsFake()){
                   $url="https://trainings-fa73e.firebaseio.com/users/".$info->getUid()."/registrationsId/.json";
@@ -33,43 +33,34 @@ class InfoController extends Controller
                   $fmc_response= $this->get('fmc_manager')->sendOrGetData($url,$data,'PATCH');           
               }
             }
-
-        }
- 
+        }*/
         return $this->render('AppBundle:info:index.html.twig', array(
             'infos' => $infos,
         ));
     }
 
-    /**
-     * Lists all Produit entities.
-     *@Rest\View(serializerGroups={"info"})
+       /**
+     * Displays a form to edit an existing info entity.
+     *
      */
-    public function editPictureAction(Request $request,  $email)
-    {  $em = $this->getDoctrine()->getManager();
-        $info = $em->getRepository('AdminBundle:Info')->findOneByUid($email);
-          if($info==null){
-          $info = new Info($email);
-          $em->persist($info);
-          $em->flush();
-          }
-        $form = $this->createForm('AppBundle\Form\InfoType', $info);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();       
-       if( $info->upload()){
-         $cloudinaryWrapper=$this ->container-> get('misteio_cloudinary_wrapper');
-          $results= $cloudinaryWrapper-> upload($info->getPath(), '_user_'.$info->getUid(),array(), array("crop" => "limit","width" => "150", "height" => "150"))->getResult();
-          $info->setPhotoURL($results['url']);
-          $em->flush();
-          $info->remove();
-       }
-          return $this->showJsonAction($info);
-        }
-        return $form;
-    }
+    public function editAction(Request $request, Info $info)
+    {
+        $deleteForm = $this->createDeleteForm($info);
+        $editForm = $this->createForm('AppBundle\Form\InfoType', $info);
+        $editForm->handleRequest($request);
 
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('info_edit', array('uid' => $info->getUid()));
+        }
+
+        return $this->render('info/edit.html.twig', array(
+            'info' => $info,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
     /**
      * Lists all Produit entities.
@@ -131,7 +122,6 @@ class InfoController extends Controller
     public function showAction(Info $info)
     {
         $deleteForm = $this->createDeleteForm($info);
-
         return $this->render('AppBundle:info:show.html.twig', array(
             'info' => $info,
             'delete_form' => $deleteForm->createView(),
@@ -147,13 +137,11 @@ class InfoController extends Controller
     {
         $form = $this->createDeleteForm($info);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($info);
             $em->flush();
         }
-
         return $this->redirectToRoute('info_index');
     }
 
@@ -226,7 +214,7 @@ class InfoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $abonnement = $em->getRepository('AppBundle:Abonnement')->findMeOnThis($info);
          if (is_null($abonnement)) {
-            $abonnement=new Abonnement('starter');
+            $abonnement=new Abonnement('STARTER');
             $abonnement->setInfo($info);
             $em->persist($abonnement);
             $em->flush();

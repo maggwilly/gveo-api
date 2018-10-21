@@ -7,15 +7,6 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    auth_token_user_provider:
-        class: AppBundle\Security\AuthTokenUserProvider
-        arguments: ["@doctrine.orm.entity_manager"]
-        public:    false
-
-    auth_token_authenticator:
-        class:     AppBundle\Security\AuthTokenAuthenticator
-        arguments: ["@security.http_utils"]
-        public:    false
 
     fmc_manager:
          class: AppBundle\Service\FMCManager

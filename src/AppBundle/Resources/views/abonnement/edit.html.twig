@@ -1,0 +1,22 @@
+{% extends "AppBundle::table.html.twig" %}
+{% block page_title %}Renouvellement{% endblock %}
+{% block body %}
+      <div class="row-fluid sortable">    
+        <div class="box span12">
+          <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon white user"></i><span class="break"></span>Renouvellement</h2>
+            <div class="box-icon">
+              <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+              <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+              <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" class='btn btn-info' value="Renouveller cet abonnement" />
+    {{ form_end(edit_form) }}
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+{% endblock %}

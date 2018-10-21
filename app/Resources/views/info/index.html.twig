@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Infos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Uid</th>
+                <th>Email</th>
+                <th>Displayname</th>
+                <th>Photourl</th>
+                <th>Langue</th>
+                <th>Phone</th>
+                <th>Ville</th>
+                <th>Paymentmethod</th>
+                <th>Enablenotifications</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for info in infos %}
+            <tr>
+                <td><a href="{{ path('info_show', { 'uid': info.uid }) }}">{{ info.uid }}</a></td>
+                <td>{{ info.email }}</td>
+                <td>{{ info.displayName }}</td>
+                <td>{{ info.photoURL }}</td>
+                <td>{{ info.langue }}</td>
+                <td>{{ info.phone }}</td>
+                <td>{{ info.ville }}</td>
+                <td>{{ info.paymentMethod }}</td>
+                <td>{% if info.enableNotifications %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('info_show', { 'uid': info.uid }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('info_edit', { 'uid': info.uid }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('info_new') }}">Create a new info</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -72,7 +72,7 @@ class Abonnement
     private $status;
 
     /**
-   * @ORM\ManyToOne(targetEntity="Info" ,inversedBy="abonnements")
+   * @ORM\OneToOne(targetEntity="Info" ,inversedBy="abonnement", cascade={"persist","remove"})
     * @ORM\JoinColumn(name="uid",referencedColumnName="uid" )
    */
     private $info;
@@ -162,22 +162,21 @@ class Abonnement
 
      /**
     * @ORM\PrePersist()
-    * @ORM\PreUpdate()
     */
     public function PrePersist(){
           $this->endDate=new \DateTime();
            switch ($this->plan) {
-               case 'starter':
+               case 'STARTER':
                  $this->endDate->modify('+30 day');
                  $this->nbervehicule=1;
                    break;
-               case 'standard':
+               case 'STANDARD':
                      $this->nbervehicule=10;
                      $this->endDate->modify('+60 day');
                    break;               
                default:
                     $this->nbervehicule=150;
-                   $this->endDate->modify('+1 year');
+                    $this->endDate->modify('+1 year');
                    break;
            }
     }
