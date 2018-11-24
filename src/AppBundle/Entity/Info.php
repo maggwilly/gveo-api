@@ -58,7 +58,19 @@ class Info
      */
     private $ville;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
+     */
+    private $pays;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
     /**
      * @var string
      *
@@ -154,6 +166,56 @@ class Info
     {
         return $this->email;
     }
+
+
+    /**
+     * Set email
+     *
+     * @param string $pays
+     *
+     * @return Info
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $pays
+     *
+     * @return Info
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
 
     /**
      * Set photoURL

@@ -12,4 +12,8 @@ AppBundle\Entity\Info:
         phone:
             groups: ['info','full', ] 
         ville:
-            groups: ['info','full', ]           
+            groups: ['info','full', ]    
+        pays:
+            groups: ['info','full', ] 
+        adresse:
+            groups: ['info','full', ]  

@@ -21,6 +21,8 @@ class InfoType extends AbstractType
         ->add('email')
          ->add('langue')
            ->add('ville')
+             ->add('pays')
+               ->add('adresse')
          ->add('phone');        
     }
     
