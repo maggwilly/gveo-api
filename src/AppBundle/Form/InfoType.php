@@ -19,8 +19,9 @@ class InfoType extends AbstractType
         $builder
         ->add('displayName')
         ->add('email')
-        ->add('uid')
-        ->add('photoURL');        
+         ->add('langue')
+           ->add('ville')
+         ->add('phone');        
     }
     
     
