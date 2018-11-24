@@ -122,21 +122,25 @@ vehicule_update:
     defaults: { _controller: "AppBundle:Vehicule:updateVehicule" }
     methods:  [GET, POST,PUT]
 
+
 vehicule_delete:
     path:     /vehicule/{id}/delete
     defaults: { _controller: "AppBundle:Vehicule:deleteVehicule" }
     methods:  [DELETE,GET]
 
+
 info_show_json:
     path:     /info/{uid}/show
     defaults: { _controller: "AppBundle:Info:showJson" }
+
 
 abonnement_show_json:
     path:     /abonnement/{uid}/show
     defaults: { _controller: "AppBundle:Info:showAbonnement" }
 
+
 info_update_json:
-    path:     /info/update
+    path:     /info/{uid}/update
     defaults: { _controller: "AppBundle:Info:editJson" }
     methods:  [GET, POST]
 

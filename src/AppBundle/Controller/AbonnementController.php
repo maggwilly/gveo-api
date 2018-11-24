@@ -20,9 +20,7 @@ class AbonnementController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $abonnements = $em->getRepository('AppBundle:Abonnement')->findAll();
-
         return $this->render('AppBundle:abonnement:index.html.twig', array(
             'abonnements' => $abonnements,
         ));
@@ -37,7 +35,6 @@ class AbonnementController extends Controller
         $abonnement = new Abonnement();
         $form = $this->createForm('AppBundle\Form\AbonnementType', $abonnement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($abonnement);
@@ -58,7 +55,6 @@ class AbonnementController extends Controller
     public function showAction(Abonnement $abonnement)
     {
         $deleteForm = $this->createDeleteForm($abonnement);
-
         return $this->render('abonnement/show.html.twig', array(
             'abonnement' => $abonnement,
             'delete_form' => $deleteForm->createView(),
@@ -96,7 +92,6 @@ class AbonnementController extends Controller
                     break;
             }
             $abonnement->setEndDate($endDate)->setStartDate($startDate);
-
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('abonnement_index', array('id' => $abonnement->getId()));
         }
@@ -121,7 +116,6 @@ class AbonnementController extends Controller
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('abonnement_index', array('id' => $abonnement->getId()));
         }
-
         return $this->render('AppBundle:abonnement:toggle.html.twig', array(
             'abonnement' => $abonnement,
             'edit_form' => $editForm->createView()
@@ -136,13 +130,11 @@ class AbonnementController extends Controller
     {
         $form = $this->createDeleteForm($abonnement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($abonnement);
             $em->flush();
         }
-
         return $this->redirectToRoute('abonnement_index');
     }
 

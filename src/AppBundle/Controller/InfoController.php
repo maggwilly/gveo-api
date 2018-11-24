@@ -23,7 +23,6 @@ class InfoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $infos = $em->getRepository('AppBundle:Info')->findAll();
        /* foreach ($infos as $key => $info) {
             foreach ($info->getRegistrations() as $key => $registration) {
@@ -48,13 +47,10 @@ class InfoController extends Controller
         $deleteForm = $this->createDeleteForm($info);
         $editForm = $this->createForm('AppBundle\Form\InfoType', $info);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('info_edit', array('uid' => $info->getUid()));
         }
-
         return $this->render('info/edit.html.twig', array(
             'info' => $info,
             'edit_form' => $editForm->createView(),
@@ -66,10 +62,11 @@ class InfoController extends Controller
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
-    public function editJsonAction(Request $request,$id=null)
+    public function editJsonAction(Request $request,$uid=null)
     {
          $em = $this->getDoctrine()->getManager();
-         $info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('id'));
+          $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
+         //$info = $em->getRepository('AppBundle:Info')->findOneByUid($request->query->get('uid'));
          $form = $this->createForm('AppBundle\Form\InfoType', $info);
          $form->submit($request->request->all(),false);
         if ($form->isValid()) {
@@ -89,15 +86,13 @@ class InfoController extends Controller
         return  $info->getAmbassador();
     }
 
-
-
     /**
      * Lists all Produit entities.
      *@Rest\View(serializerGroups={"info"})
      */
     public function showJsonAction(Request $request,$uid=null){
          $em = $this->getDoctrine()->getManager();
-         $url= "https://trainings-fa73e.firebaseio.com/users/".$uid.".json";
+         $url= "https://geveo-d01fb.firebaseio.com/users/".$uid.".json";
          $res = $this->get('fmc_manager')->sendOrGetData($url,null,'GET');        
          $info = $em->getRepository('AppBundle:Info')->findOneByUid($uid);
          $registrationId=$request->query->get('registrationId');
@@ -111,7 +106,7 @@ class InfoController extends Controller
                 $em->persist($info); 
                  $em->flush(); 
               }
-        return $info->getEmail()!=null?$info:$res;
+        return $info;
     }
 
     
@@ -168,7 +163,6 @@ class InfoController extends Controller
     public function createRegistrationAction(Request $request)
     {  
           $em = $this->getDoctrine()->getManager();
-
             $registration = new Registration();
             $form = $this->createForm('AppBundle\Form\RegistrationType', $registration);
             $form->submit($request->request->all(),false);
@@ -179,6 +173,7 @@ class InfoController extends Controller
               $em->flush();
             return array('success'=>true);
           }
+
         return $form;
     }
 
