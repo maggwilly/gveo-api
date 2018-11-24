@@ -11,3 +11,5 @@ AppBundle\Entity\Abonnement:
             groups: ['full']       
         status:
             groups: ['full']   
+        info:
+            groups: ['full']   
