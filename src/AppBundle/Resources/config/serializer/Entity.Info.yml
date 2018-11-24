@@ -1,0 +1,15 @@
+AppBundle\Entity\User:
+    exclusion_policy: none
+    properties:
+        uid:
+            groups: ['info','full' ]
+        displayName:
+            groups: ['info','full']
+        email:
+            groups: ['info','full', ] 
+        langue:
+            groups: ['info','full', ] 
+        phone:
+            groups: ['info','full', ] 
+        ville:
+            groups: ['info','full', ]           

@@ -41,7 +41,6 @@ class AbonnementController extends Controller
             $em->flush();
             return $this->redirectToRoute('abonnement_show', array('id' => $abonnement->getId()));
         }
-
         return $this->render('abonnement/new.html.twig', array(
             'abonnement' => $abonnement,
             'form' => $form->createView(),

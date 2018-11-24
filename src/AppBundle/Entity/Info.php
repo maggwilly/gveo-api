@@ -1,9 +1,7 @@
 <?php
-
 namespace AppBundle\Entity;
 use AppBundle\Entity\Registration;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table(name="user_account_details")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\InfoRepository")
@@ -365,7 +363,6 @@ class Info
     {
         $this->registrations[] = $registration;
         $registration->setInfo(  $this);
-
         return $this;
     }
 
