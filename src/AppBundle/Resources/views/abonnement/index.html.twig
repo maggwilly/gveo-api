@@ -26,7 +26,7 @@
         <tbody>
         {% for abonnement in abonnements %}
             <tr>
-                <td>{% if abonnement.info.displayName %}{% else %} {{ abonnement.info.email }}{% endif %}
+                <td>{% if abonnement.info.displayName %}{{ abonnement.info.displayName }}{% else %} {{ abonnement.info.email }}{% endif %}
                 <p><b> Inscrit le :</b>  {{abonnement.date|date('d/m/Y à H:i') }}</p>
                 </td>
                 <td>
