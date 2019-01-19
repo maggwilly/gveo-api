@@ -231,6 +231,7 @@ class Reparation implements InfoInterface
         if(is_null($this->vehicule->getLastReleve()))
             return true;
            $tokm=$this->vehicule->getLastReleve()->getKm()-$this->km;
+
            $this->expired=($tokm>$this->duree)||($tokm<$this->operation->getKmAlerte());
        return $this->expired;
     }

@@ -149,9 +149,9 @@ class ReparationController extends Controller
         ->findLastByVehicule($vehicule,$operation);
         if(is_null($reparation))
             $todos[]=$operation->setTodo('Vérifier et renseigner');
-         elseif($reparation->isExpired()) {
+         /*elseif($reparation->isExpired()) {
              $todos[]=$operation->setTodo('Contrôler et remplacer');
-         }
+         }*/
         }
         return   $todos;
     }
