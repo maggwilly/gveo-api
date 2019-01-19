@@ -85,9 +85,7 @@ class VehiculeController extends Controller
         if ($form->isValid()) {
             $em->flush();
           $releve = $em->getRepository('AppBundle:Releve')->findLastByVehicule($entity);
-          $couts=$this->couts($request->get('id'));
           $entity->setLastReleve($releve);
-          $entity->setCouts($couts);
            return $entity;
         }
 
