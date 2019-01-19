@@ -57,6 +57,12 @@ maintenance_create:
     defaults: { _controller: "AppBundle:Reparation:createMaintenance" }
     methods:  [GET, POST]
 
+maintenance_update:
+    path:     /maintenance/{id}/update
+    defaults: { _controller: "AppBundle:Reparation:updateMaintenance" }
+    methods:  [GET, POST,PUT]
+
+
 releve_create:
     path:     /releve/create
     defaults: { _controller: "AppBundle:Reparation:createReleve" }
