@@ -17,6 +17,7 @@ class VehiculeType extends AbstractType
         ->add('index0')
         ->add('chauffeur')
         ->add('description')
+         //->add('type')
         ->add('coutAchat')
         ->add('dateMiseEnCirculation','datetime', array(
               'widget' => 'single_text',

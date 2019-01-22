@@ -81,7 +81,7 @@ class AbonnementController extends Controller
             $startDate=new \DateTime();
             switch ($abonnement->getPlan()) {
                 case 'STARTER':
-                  $endDate->modify('+30 day');
+                    $endDate->modify('+1 year');
                     break;
                 case 'STANDARD':
                       $endDate->modify('+1 year');

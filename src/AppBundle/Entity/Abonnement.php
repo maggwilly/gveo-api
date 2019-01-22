@@ -167,12 +167,12 @@ class Abonnement
           $this->endDate=new \DateTime();
            switch ($this->plan) {
                case 'STARTER':
-                 $this->endDate->modify('+30 day');
-                 $this->nbervehicule=1;
+                 $this->endDate->modify('+1 year');
+                 $this->nbervehicule=2;
                    break;
                case 'STANDARD':
                      $this->nbervehicule=10;
-                     $this->endDate->modify('+60 day');
+                     $this->endDate->modify('+1 year');
                    break;               
                default:
                     $this->nbervehicule=150;
