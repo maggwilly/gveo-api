@@ -6,7 +6,11 @@ AppBundle\Entity\Abonnement:
         startDate:
             groups: ['full','info']  
             expose: true
-            type: DateTime<'Y-m-d'>                  
+            type: DateTime<'Y-m-d'>   
+        endDate:
+            groups: ['full','info']  
+            expose: true
+            type: DateTime<'Y-m-d'>                             
         nbervehicule:
             groups: ['full','info']       
         status:
