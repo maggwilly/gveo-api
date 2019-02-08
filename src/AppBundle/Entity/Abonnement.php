@@ -295,6 +295,7 @@ class Abonnement
      */
     public function setInfo(\AppBundle\Entity\Info $info = null)
     {
+       $info->setAbonnement( $this);
         $this->info = $info;
 
         return $this;

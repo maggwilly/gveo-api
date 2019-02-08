@@ -106,6 +106,13 @@ class InfoController extends Controller
                 $em->persist($info); 
                  $em->flush(); 
               }
+        if (is_null( $info->getAbonnement())) {
+            $abonnement=new Abonnement('STARTER');
+            $abonnement->setInfo($info);
+            $em->persist($abonnement);
+            $em->flush();
+              return  $info;
+         }         
         return $info;
     }
 
