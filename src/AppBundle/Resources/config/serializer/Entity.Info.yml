@@ -17,3 +17,5 @@ AppBundle\Entity\Info:
             groups: ['info','full', ] 
         adresse:
             groups: ['info','full', ]  
+        abonnement:
+            groups: ['info','full', ]  

@@ -2,14 +2,14 @@ AppBundle\Entity\Abonnement:
     exclusion_policy: none
     properties:
         id:
-            groups: ['full']
+            groups: ['full','info']
         startDate:
-            groups: ['full']  
+            groups: ['full','info']  
             expose: true
             type: DateTime<'Y-m-d'>                  
         nbervehicule:
-            groups: ['full']       
+            groups: ['full','info']       
         status:
-            groups: ['full']   
+            groups: ['full','info']   
         info:
-            groups: ['full']   
+            groups: ['abonnement']   
