@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Systeme;
 use AppBundle\Entity\Operation;
 use AppBundle\Entity\Marque;
+use AppBundle\Entity\Piece;
 use AppBundle\Form\PieceType;
 use AppBundle\Entity\InfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,21 +59,16 @@ class UtilsController extends Controller
      */
     public function createPiecesAction(Request $request)
     {
-         $data=array();
-         $form = $this->createFormBuilder($data, array('csrf_protection' => false,'allow_extra_fields' => true))
-            ->add('pieces', CollectionType::class, array('entry_type' => PieceType::class))
-            ->getForm();
-           $form->handleRequest($request);  
-        $form->submit($request->request->all(),false); // Validation des d
-        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            foreach ($data['pieces'] as $key => $entity) {
-                $em->persist($entity);
+            foreach ($request->request->all() as $key => $entityform) {
+                $entity = new Piece();
+                $form = $this->createCreateForm($entity);
+                 $form->submit($entityform,false); 
+                 $em->persist($entity);
             }
             $em->flush();
            return ['success'=>true,'data'=>$data];
-        }
-        return $request->request->all();
+  
     } 
     /**
      * Creates a new Produit entity.

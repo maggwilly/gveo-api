@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="piece")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PieceRepository")
  */
-class Piece
+class Piece implements InfoInterface
 {
     /**
      * @var int
@@ -88,5 +88,15 @@ class Piece
     {
         return $this->systeme;
     }  
+
+                       /**
+     * Get virifiedAt
+     *
+     * @return class 
+     */
+    public function getClassType()
+    {
+        return MarqueType::class;
+    }   
 }
 
