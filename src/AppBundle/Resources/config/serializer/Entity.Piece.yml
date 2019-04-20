@@ -1,0 +1,9 @@
+AppBundle\Entity\Piece:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['full','piece']
+        nom:
+            groups: ['full','piece'] 
+        systeme:
+            groups: ['piece']             
