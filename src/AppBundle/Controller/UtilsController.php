@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Systeme;
 use AppBundle\Entity\Operation;
 use AppBundle\Entity\Marque;
+use AppBundle\Form\PieceType;
 use AppBundle\Entity\InfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les annotations
 /**
@@ -50,6 +52,27 @@ class UtilsController extends Controller
         return  $form;
     }
    
+      /**
+     * Creates a new Produit entity.
+     *@Rest\View(serializerGroups={"full"})
+     */
+    public function createPiecesAction(Request $request)
+    {
+         $data=array();
+         $form = $this->createFormBuilder($dat)
+            ->add('pieces', CollectionType::class, array('entry_type' => PieceType::class))
+            ->getForm();
+        $form->submit($request->request->all(),false); // Validation des d
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            foreach ($data['pieces'] as $key => $entity) {
+                $em->persist($entity);
+            }
+            $em->flush();
+           return ['success'=>true,'data'=>$data];
+        }
+        return  $form;
+    } 
     /**
      * Creates a new Produit entity.
      *@Rest\View(serializerGroups={"full"})

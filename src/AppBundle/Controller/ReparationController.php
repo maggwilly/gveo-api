@@ -34,6 +34,17 @@ class ReparationController extends Controller
     }
 
 
+
+    /**
+     * Creates a new Produit entity.
+     *@Rest\View(serializerGroups={"piece"})
+     */
+    public function piecesAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pieces = $em->getRepository('AppBundle:Piece')->findBySysteme($request->get('systeme'));
+        return  $pieces;
+    }
     /**
      * Creates a new Produit entity.
      *@Rest\View()
@@ -69,9 +80,6 @@ class ReparationController extends Controller
        return $this->couts($request->get('uid'),$request->get('vehicule'), $startDate, $endDate);
       
     }
-
-
-
 
 
         /**

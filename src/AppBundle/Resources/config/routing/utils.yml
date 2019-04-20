@@ -8,6 +8,11 @@ marque_create:
     defaults: { _controller: "AppBundle:Utils:createMarque" }
     methods:  [GET, POST]
 
+pieces_create:
+    path:     /pieces/create
+    defaults: { _controller: "AppBundle:Utils:createPieces" }
+    methods:  [GET, POST]
+
 systeme_create:
     path:     /systeme/create
     defaults: { _controller: "AppBundle:Utils:createSysteme" }
