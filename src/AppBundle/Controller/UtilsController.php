@@ -72,7 +72,7 @@ class UtilsController extends Controller
             $em->flush();
            return ['success'=>true,'data'=>$data];
         }
-        return  $form;
+        return $request->all();
     } 
     /**
      * Creates a new Produit entity.
