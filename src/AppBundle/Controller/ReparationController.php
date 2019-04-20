@@ -42,7 +42,7 @@ class ReparationController extends Controller
     public function piecesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $pieces = $em->getRepository('AppBundle:Piece')->findBySysteme($request->get('systeme'));
+        $pieces = $em->getRepository('AppBundle:Piece')->findBySysteme($request->get('id'));
         return  $pieces;
     }
     /**
