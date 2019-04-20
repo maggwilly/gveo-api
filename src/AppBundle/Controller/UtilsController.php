@@ -62,6 +62,7 @@ class UtilsController extends Controller
          $form = $this->createFormBuilder($data, array('csrf_protection' => false,'allow_extra_fields' => true))
             ->add('pieces', CollectionType::class, array('entry_type' => PieceType::class))
             ->getForm();
+           $form->handleRequest($request);  
         $form->submit($request->request->all(),false); // Validation des d
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
