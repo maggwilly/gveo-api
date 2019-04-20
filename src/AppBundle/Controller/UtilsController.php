@@ -59,7 +59,7 @@ class UtilsController extends Controller
     public function createPiecesAction(Request $request)
     {
          $data=array();
-         $form = $this->createFormBuilder($dat)
+         $form = $this->createFormBuilder($data, array('csrf_protection' => false))
             ->add('pieces', CollectionType::class, array('entry_type' => PieceType::class))
             ->getForm();
         $form->submit($request->request->all(),false); // Validation des d
