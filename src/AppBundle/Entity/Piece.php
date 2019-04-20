@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use AppBundle\Form\PieceType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -96,7 +96,7 @@ class Piece implements InfoInterface
      */
     public function getClassType()
     {
-        return MarqueType::class;
+        return PieceType::class;
     }   
 }
 
