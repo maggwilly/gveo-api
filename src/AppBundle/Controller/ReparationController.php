@@ -43,7 +43,7 @@ class ReparationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $pieces = $em->getRepository('AppBundle:Piece')->findBySysteme($request->get('id'));
-        return  $pieces;
+        return  $request->get('id');
     }
     /**
      * Creates a new Produit entity.
