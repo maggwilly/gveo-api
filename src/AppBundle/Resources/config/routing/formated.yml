@@ -119,7 +119,7 @@ vehicule_index:
     methods:  GET
 
 pieces_list:
-    path:     /pieces/{id}/systeme
+    path:     /Piece?id={id}
     defaults: { _controller: "AppBundle:Reparation:pieces" }
     methods:  GET
 
