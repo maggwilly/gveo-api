@@ -28,7 +28,7 @@ class UtilsController extends Controller
         $em = $this->getDoctrine()->getManager();
         switch ($request->get('entityName')) {
             case 'Piece':
-              return  $em->getRepository('AppBundle:'.$request->get('entityName'))->findBySysteme($request->get('id'))
+              return  $em->getRepository('AppBundle:'.$request->get('entityName'))->findBySysteme($request->get('id'));
             default:
                 # code...
              return    $em->getRepository('AppBundle:'.$request->get('entityName'))->findAll();
