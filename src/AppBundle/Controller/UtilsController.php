@@ -26,10 +26,13 @@ class UtilsController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:'.$request->get('entityName'))->findAll();
-
-        return  $entities;
+        switch ($request->get('entityName')) {
+            case 'Piece':
+              return  $em->getRepository('AppBundle:'.$request->get('entityName'))->findBySysteme($request->get('id'))
+            default:
+                # code...
+             return    $em->getRepository('AppBundle:'.$request->get('entityName'))->findAll();
+        }
       
     }
 

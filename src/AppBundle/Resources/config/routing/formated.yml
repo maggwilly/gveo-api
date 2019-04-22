@@ -118,11 +118,6 @@ vehicule_index:
     defaults: { _controller: "AppBundle:Vehicule:index" }
     methods:  GET
 
-pieces_list:
-    path:     /Piece?id={id}
-    defaults: { _controller: "AppBundle:Reparation:pieces" }
-    methods:  GET
-
 vehicule_create:
     path:     /vehicule/create
     defaults: { _controller: "AppBundle:Vehicule:createVehicule" }
