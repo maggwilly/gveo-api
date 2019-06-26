@@ -243,15 +243,12 @@ public function preUpdate(){
         return $this->marque;
     }
 
-     /**
-     * Get marque
-     *
-     * @return \AppBundle\Entity\Marque 
-     */
+     /** 
+      @ORM\PostLoad */
     public function getLastReleve()
     {
         if(is_null($this->lastReleve)&&!empty($this->releves))
-            return $this->releves->last();
+            $this->lastReleve=$this->releves->last();
         return $this->lastReleve;
     }
 
